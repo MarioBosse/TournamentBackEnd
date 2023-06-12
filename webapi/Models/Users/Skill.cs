@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace webapi.Models.UsersRoles
+namespace webapi.Models.Users
 {
-    [Table("Skills")]
+    [Table("usr_Skills")]
     public class Skill
     {
-        public Int64 Id { get; set; }
-        public String Difficulty { get; set; } = String.Empty;
+        public long Id { get; set; }
+        public string Difficulty { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
