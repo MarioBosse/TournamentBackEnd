@@ -3,7 +3,7 @@ using System.Security.Permissions;
 
 namespace webapi.Models.UsersRoles
 {
-    [Table("Roles")]
+    [Table("rol_Roles")]
     public class Role
     {
         public Int64 Id { get; set; }

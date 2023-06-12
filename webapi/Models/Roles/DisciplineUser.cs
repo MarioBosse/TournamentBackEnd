@@ -2,7 +2,7 @@
 
 namespace webapi.Models.UsersRoles
 {
-    [Table("Discipline_User")]
+    [Table("rol_DisciplinesUsers")]
     public class DisciplineUser
     {
         public Int64 IdDiscipline { get; set; }
