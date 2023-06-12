@@ -2,11 +2,11 @@
 
 namespace webapi.Models.UsersRoles
 {
-    [Table("Skills")]
-    public class Skill
+    [Table("rol_Disciplines")]
+    public class Discipline
     {
         public Int64 Id { get; set; }
-        public String Difficulty { get; set; } = String.Empty;
+        public String Activity{ get; set; } = String.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
