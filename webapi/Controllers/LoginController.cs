@@ -11,12 +11,12 @@ namespace webapi.Controllers
         [Route("[controller]/All")]
         public String GetAll()
         {
-            return "Login/GetAll";
+            return "Login/GetAll\nVa donner la liste de tout le usager existant";
         }
         [Route("[controller]/Check")]
         public String Check(LoginSend info)
         {
-            return "Login/Check";
+            return info.Courriel + '\n' + "Login/Check\nSi le client existe, retourne un TOKEN, sinon," + '\n' + "retourne FALSE pour effectuer la création d'un nouveu profil";
         }
     }
 }
