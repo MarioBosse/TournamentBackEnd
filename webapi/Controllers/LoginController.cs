@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using webapi.Context;
 using webapi.Models;
 
 namespace webapi.Controllers
@@ -7,6 +8,14 @@ namespace webapi.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
+        private readonly UserRoleContext _roleContext;
+        private readonly MySqlDataConnector _dataConnector;
+
+        public LoginController(UserRoleContext roleContext, MySqlDataConnector dataConnector)
+        {
+            _roleContext = roleContext;
+            _dataConnector = dataConnector;
+        }
         // Donne la liste de tous les courriels enregistrés
         [Route("[controller]/All")]
         public String GetAll()
