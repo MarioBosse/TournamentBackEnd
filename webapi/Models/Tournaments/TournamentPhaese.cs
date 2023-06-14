@@ -5,8 +5,10 @@ namespace webapi.Models.Tournaments
     [Table("trn_TournamentPhases")]
     public class TournamentPhaese
     {
-        public Int64 Id { get; set; }
-        public Int64 TournamentId { get; set; }
+        public Int64 IdTournamentPhase { get; set; }
+        public Int64 IdTournamentId { get; set; }
         public String Name { get; set; } = String.Empty;
+
+        public virtual Tournament Tournament { get; set; }
     }
 }
