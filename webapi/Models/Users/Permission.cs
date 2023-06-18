@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace webapi.Models.UsersRoles
+namespace webapi.Models.Users
 {
-    [Table("Permissions")]
+    [Table("usr_Permissions")]
     public class Permission
     {
-        public Int64 ID { get; set; }
-        public String Name { get; set; } = String.Empty;
-        public String GuardName { get; set; } = String.Empty;
+        public long IdPermission { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string GuardName { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
