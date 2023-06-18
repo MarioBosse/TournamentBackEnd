@@ -9,12 +9,10 @@ namespace webapi.Controllers
     public class LoginController : ControllerBase
     {
         private readonly UserRoleContext _roleContext;
-        private readonly MySqlDataConnector _dataConnector;
 
-        public LoginController(UserRoleContext roleContext, MySqlDataConnector dataConnector)
+        public LoginController(UserRoleContext roleContext)
         {
             _roleContext = roleContext;
-            _dataConnector = dataConnector;
         }
         // Donne la liste de tous les courriels enregistrés
         [Route("[controller]/All")]

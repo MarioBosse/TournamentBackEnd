@@ -6,11 +6,6 @@ namespace webapi.Models.Address
     public class Country
     {
         public Int64 IdCountry { get; set; }
-        public String Name { get; set; }
-        public virtual ICollection<Province> Provinces { get; set; }
-        public Country()
-        {
-            this.Provinces = new HashSet<Province>();
-        }
+        public String Name { get; set; } = String.Empty;
     }
 }

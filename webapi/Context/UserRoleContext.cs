@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Diagnostics;
+using webapi.Definitions;
 using webapi.Models.Address;
+using webapi.Models.Building;
+using webapi.Models.Camping;
 using webapi.Models.Tournaments;
 using webapi.Models.Users;
 using webapi.Models.UsersRoles;
@@ -18,6 +19,12 @@ namespace webapi.Context
         {
             _connectionString = connectionString;
             Database.EnsureCreated();
+
+
+            Database.OpenConnection();
+            InitContent();
+            Database.CloseConnection();
+
         }
         public UserRoleContext(DbContextOptions<UserRoleContext> option) : base(option)
         {
@@ -56,6 +63,9 @@ namespace webapi.Context
         public DbSet<SkillUser>? SkillUsers { get; private set; }
         public DbSet<User>? Users { get; private set; }
 
+        // Camping
+        public DbSet<Terrain> Terrains { get; private set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
@@ -68,31 +78,28 @@ namespace webapi.Context
 
             modelBuilder.Entity<Country>(entity =>
             {
+                
                 entity.HasKey(e => e.IdCountry);
             });
 
             modelBuilder.Entity<Province>(entity =>
             {
                 entity.HasKey(e => e.IdProvince);
-                entity.Property(f => f.IdCountry).IsRequired();
             });
 
             modelBuilder.Entity<City>(entity =>
             {
                 entity.HasKey(e => e.IdCity);
-                entity.Property(e => e.IdProvince).IsRequired();
             });
 
             modelBuilder.Entity<Address>(entity =>
             {
                 entity.HasKey(e => e.IdAddress);
-                entity.Property(e => e.IdCity).IsRequired();
             });
 
 
             modelBuilder.Entity<Discipline>(entity => {
                 entity.HasKey(e => e.IdDiscipline);
-                entity.Property(e => e.Activity).IsRequired();
             });
 
             modelBuilder.Entity<DisciplineUser>(entity => {
@@ -168,6 +175,146 @@ namespace webapi.Context
             modelBuilder.Entity<User>(entity => {
                 entity.HasKey(e => e.IdUser);
             });
+
+            modelBuilder.Entity<Terrain>(entity => {
+                entity.HasKey(e => e.IdTerrain);
+            });
         }
+
+        private void InitContent()
+        {
+            foreach(TransitValue addr in new DbBaseCreationLists().Addresss)
+            {
+                AddLieu(addr.NamePlace, AddAddress(new TransAddress(addr.DoorNumber,
+                                                                    addr.StreetName,
+                                                                    addr.StreetName2,
+                                                                    addr.AppNumber,
+                                                                    addr.Zipcode,
+                                                                    AddVille(addr.City,
+                                                                    AddProvince(addr.Province,
+                                                                    AddCountry(addr.Pays))))));
+            }
+        }
+        #region Country
+        private Int64 GetCountry(String Name)
+        {
+            if (Countries == null || Countries.Count() == 0) return 0;
+            var test = this.Countries.Where(e => e.Name == Name).FirstOrDefault();
+            if (test != null)
+                return test.IdCountry;
+            return 0;
+        }
+        private Int64 AddCountry(String Name)
+        {
+            if(Countries == null) return 0;
+            var p = GetCountry(Name);
+            if (p == 0)
+            {
+                Countries.Add(new Country { Name = Name });
+                SaveChanges();
+            }
+            return GetCountry(Name);
+        }
+        #endregion
+        #region Province
+        private Int64 GetProvince(String Name, Int64 pays)
+        {
+            if (Provinces == null || Provinces.Count() == 0) return 0;
+            var test = Provinces.Where(e => e.Name == Name).FirstOrDefault();
+            if (test != null)
+            {
+                return test.IdProvince;
+            }
+            return 0;
+        }
+
+        private Int64 AddProvince(String Name, Int64 pays)
+        {
+            var p = GetProvince(Name, pays);
+            if (p == 0)
+            {
+                if(Provinces != null) Provinces.Add(new Province { Name = Name, IdCountry = pays });
+                SaveChanges();
+            }
+            return GetProvince(Name, pays);
+        }
+        #endregion
+        #region Ville
+        private Int64 GetVille(String Name, Int64? province)
+        {
+            if (Cities == null || Cities.Count() == 0) return 0;
+            var test = Cities.Where(c => c.Name == Name).FirstOrDefault();
+            if (test != null)
+            {
+                return test.IdCity;
+            }
+            return 0;
+        }
+
+        private Int64 AddVille(String Name, Int64 province)
+        {
+            var v = GetVille(Name, province);
+            if (v == 0)
+            {
+                if(Cities != null) Cities.Add(new City { Name = Name, IdProvince = province });
+                SaveChanges();
+            }
+            return GetVille(Name, province);
+        }
+        #endregion
+        #region Adresse
+        private Int64 GetAddress(TransAddress ta)
+        {
+            if (Addresses == null || Addresses.Count() == 0) { return 0; }
+            var test = Addresses.Where( e => e.DoorNumber == ta.doorNumber &&
+                                        e.StreetName == ta.streetName &&
+                                        e.StreetName2 == ta.streetName2 &&
+                                        e.AppNumber == ta.appartment &&
+                                        e.Zipcode == ta.zipcode &&
+                                        e.IdCity == ta.city).FirstOrDefault();
+            if(test != null)
+            {
+                return test.IdAddress;
+            }
+            return 0;
+        }
+
+        private Int64 AddAddress(TransAddress ta)
+        {
+            if (ta == null) return 0;
+            var a = GetAddress(ta);
+            if (a == 0)
+            {
+                if(Addresses != null) Addresses.Add(new Address() { DoorNumber=ta.doorNumber,
+                                                                    StreetName=ta.streetName,
+                                                                    StreetName2 = ta.streetName2,
+                                                                    AppNumber = ta.appartment,
+                                                                    Zipcode=ta.zipcode,
+                                                                    IdCity = ta.city});
+                SaveChanges();
+            }
+            return GetAddress(ta);
+        }
+        #endregion
+        #region Nom de lieu
+        private Int64 GetLieu(String Name, Int64 idAddress)
+        {
+            if (Terrains == null || Terrains.Count() == 0) return 0;
+            var test = Terrains.Where(e => e.Name == Name && e.IdAddress == idAddress).FirstOrDefault();
+            return 0;
+        }
+
+        private Int64 AddLieu(String Name, Int64 Address)
+        {
+            if (Terrains == null) return 0;
+            var l = GetLieu(Name, Address);
+            if(l == 0)
+            {
+                Terrains.Add(new Terrain() { Name = Name, IdAddress = Address });
+                SaveChanges();
+            }
+            return GetLieu(Name, Address);
+        }
+        #endregion
     }
 }

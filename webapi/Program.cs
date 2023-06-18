@@ -24,7 +24,6 @@ internal class Program
             x.UseMySql(builder.Configuration.GetConnectionString(connectionString),
                        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString(connectionString))));
         builder.Services.AddSingleton(x => new UserRoleContext(connectionString));
-        builder.Services.AddSingleton(x => new MySqlDataConnector(builder.Configuration));
 
         //builder.Services.AddSwaggerGen();
 

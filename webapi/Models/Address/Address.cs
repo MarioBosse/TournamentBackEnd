@@ -6,11 +6,11 @@ namespace webapi.Models.Address
     public class Address
     {
         public long IdAddress { get; set; }
-        public string? DoorNumber { get; set; }
-        public string? StreetName { get; set; }
-        public string? StreetName2 { get; set; }
-        public string? AppNumber { get; set; }
-        public Int64 IdCity { get; set; }
-        public virtual City? City { get; set; }
+        public String DoorNumber { get; set; } = String.Empty;
+        public String StreetName { get; set; } = String.Empty;
+        public String StreetName2 { get; set; } = String.Empty;
+        public String AppNumber { get; set; } = String.Empty;
+        public String Zipcode { get; set; } = String.Empty; 
+        public Int64? IdCity { get; set; }
     }
 }

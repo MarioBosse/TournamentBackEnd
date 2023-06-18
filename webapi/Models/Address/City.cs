@@ -6,8 +6,7 @@ namespace webapi.Models.Address
     public class City
     {
         public Int64 IdCity { get; set; }
-        public String Name { get; set; }
+        public String Name { get; set; } = String.Empty;
         public Int64 IdProvince { get; set; }
-        public virtual Province Province { get; set; }
     }
 }
