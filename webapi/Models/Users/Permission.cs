@@ -5,7 +5,7 @@ namespace webapi.Models.Users
     [Table("usr_Permissions")]
     public class Permission
     {
-        public long ID { get; set; }
+        public long IdPermission { get; set; }
         public string Name { get; set; } = string.Empty;
         public string GuardName { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;

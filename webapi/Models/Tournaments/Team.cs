@@ -5,7 +5,7 @@ namespace webapi.Models.Tournaments
     [Table("trn_Teams")]
     public class Team
     {
-        public Int64 Id { get; set; }
+        public Int64 IdTeam { get; set; }
         public String Name { get; set; }
     }
 }

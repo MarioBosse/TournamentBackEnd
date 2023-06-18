@@ -5,8 +5,8 @@ namespace webapi.Models.UsersRoles
     [Table("rol_RoleHasPermissions")]
     public class RoleHasPermission
     {
-        public Int64 RoleId { get; set; }
+        public Int64 IdRolePermission { get; set; }
         public String ModelType { get; set; } = String.Empty;
-        public Int64 ModelId { get; set; }
+        public Int64 IdModel { get; set; }
     }
 }

@@ -2,10 +2,10 @@
 
 namespace webapi.Models.Tournaments
 {
-    [Table("trn_Players")]
+    [Table("trn_MatchupTypes")]
     public class MatchupType
     {
-        public Int64 Id { get; set; }
+        public Int64 IdMatcupType { get; set; }
         public String Name { get; set; }
     }
 }

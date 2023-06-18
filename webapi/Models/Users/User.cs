@@ -6,7 +6,7 @@ namespace webapi.Models.Users
     [Table("usr_Users")]
     public class User
     {
-        public long Id { get; set; }
+        public long IdUser { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         [Required]
@@ -19,8 +19,10 @@ namespace webapi.Models.Users
         public string PasswordResetCode { get; set; } = string.Empty;
         public string ActivationCode { get; set; } = string.Empty;
         public string RememberToken { get; set; } = string.Empty;
-        public Int64 AddressId { get; set; } = 0;
+        public Int64 IdAddress { get; set; } = 0;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        public virtual Address.Address Adresse { get; set; }
     }
 }
