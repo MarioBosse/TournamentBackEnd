@@ -1,4 +1,4 @@
-﻿using webapi.Context;
+using webapi.Context;
 using webapi.Models;
 using webapi.Models.Users;
 
@@ -19,7 +19,7 @@ namespace webapi.DbLink
 
         public List<User> GetAlls()
         {
-            if (_roleContext == null || _roleContext.Users == null) return null;
+            if (_roleContext == null || _roleContext.Users == null) return new List<User>();
 
             return _roleContext.Users.Where(e => e.IdUser > 0).ToList<User>();
 

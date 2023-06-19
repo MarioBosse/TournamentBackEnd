@@ -183,7 +183,7 @@ namespace webapi.Context
 
         private void InitContent()
         {
-            foreach(TransitValue addr in new DbBaseCreationLists().Addresss)
+            foreach(TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
             {
                 AddLieu(addr.NamePlace, AddAddress(new TransAddress(addr.DoorNumber,
                                                                     addr.StreetName,
@@ -193,6 +193,11 @@ namespace webapi.Context
                                                                     AddVille(addr.City,
                                                                     AddProvince(addr.Province,
                                                                     AddCountry(addr.Pays))))));
+            }
+
+            foreach(TransitUserValue tuv in  new DbBaseCreationLists().Users)
+            {
+                AddUser(tuv);
             }
         }
         #region Country
@@ -314,6 +319,42 @@ namespace webapi.Context
                 SaveChanges();
             }
             return GetLieu(Name, Address);
+        }
+        #endregion
+        #region User
+        private Int64 GetUser(TransitUserValue tuv)
+        {
+            if (Users == null || Users.Count() == 0) return 0;
+            var test = Users.Where(e => e.FirstName == tuv.Firstname &&
+                                        e.LastName == tuv.Lastname &&
+                                        e.Gender == tuv.Gender &&
+                                        e.Email == tuv.Email &&
+                                        e.Password == tuv.Password).FirstOrDefault();
+            if (test != null)
+                return test.IdUser;
+            return 0;
+        }
+
+        private Int64 AddUser(TransitUserValue usersValue)
+        {
+            if (usersValue == null) return 0;
+            var a = GetUser(usersValue);
+            if (a == 0)
+            {
+                if (Users != null) Users.Add(new User()
+                {
+                    FirstName = usersValue.Firstname,
+                    LastName = usersValue.Lastname,
+                    Email = usersValue.Email,
+                    Password = usersValue.Password,
+                    Gender = usersValue.Gender,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    IsActivated = true
+                });
+                SaveChanges();
+            }
+            return GetUser(usersValue);
         }
         #endregion
     }
