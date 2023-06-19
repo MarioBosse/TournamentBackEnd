@@ -199,6 +199,11 @@ namespace webapi.Context
             {
                 AddUser(tuv);
             }
+
+            foreach(TransitTournementType tt in new  DbBaseCreationLists().TournamentType)
+            {
+                AddTournamentType(tt);
+            }
         }
         #region Country
         private Int64 GetCountry(String Name)
@@ -299,6 +304,30 @@ namespace webapi.Context
                 SaveChanges();
             }
             return GetAddress(ta);
+        }
+        #endregion
+        #region TournamentType
+        private Int64 GetTournamentType(TransitTournementType tt)
+        {
+            if(TournamentTypes == null || TournamentTypes.Count() == 0) return 0;
+            var test = TournamentTypes.Where(e => e.Name == tt.Name).FirstOrDefault();
+            if (test != null)
+                return test.IdTournamentType;
+            return 0;
+        }
+        private Int64 AddTournamentType(TransitTournementType tt)
+        {
+            if(tt == null) return 0;
+            var a = GetTournamentType(tt);
+            if(a == 0)
+            {
+                if (TournamentTypes != null) TournamentTypes.Add(new TournamentType()
+                {
+                    Name = tt.Name
+                });
+                SaveChanges();
+            }
+            return GetTournamentType(tt);
         }
         #endregion
         #region Nom de lieu
