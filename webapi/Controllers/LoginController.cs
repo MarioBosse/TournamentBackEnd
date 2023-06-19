@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Reflection.Metadata.Ecma335;
 using webapi.Context;
 using webapi.Models;
 
@@ -16,14 +18,20 @@ namespace webapi.Controllers
         }
         // Donne la liste de tous les courriels enregistrés
         [Route("[controller]/All")]
-        public String GetAll()
+        public ActionResult GetAll()
         {
-            return "Login/GetAll\nVa donner la liste de tout le usager existant";
+            return Ok(new DbLink.Login(_roleContext).GetAlls());
         }
         [Route("[controller]/Check")]
-        public String Check(LoginSend info)
+        public ActionResult Check(LoginSend info)
         {
-            return info.Courriel + '\n' + "Login/Check\nSi le client existe, retourne un TOKEN, sinon," + '\n' + "retourne FALSE pour effectuer la création d'un nouveu profil";
+            return Ok(new DbLink.Login(_roleContext).CheckConnection(info));
+        }
+
+        [Route("[controller]/Email")]
+        public ActionResult CheckEmail(EmailCheck courriel)
+        {
+            return Ok(new DbLink.Login(_roleContext).EmailExisting(courriel.Email));
         }
     }
 }
