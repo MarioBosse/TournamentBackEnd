@@ -17,6 +17,7 @@ namespace webapi.Models.Users
         [Column(TypeName = "LongBlob")]
         public byte[]? ProfilePhoto { get; set; }
         public bool IsActivated { get; set; } = false;
+        public string? TokenSecretKey { get; set; } = string.Empty;
         public string? PasswordResetCode { get; set; } = string.Empty;
         public string? ActivationCode { get; set; } = string.Empty;
         public string? RememberToken { get; set; } = string.Empty;

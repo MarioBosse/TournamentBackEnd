@@ -75,7 +75,7 @@ namespace webapi.Context
         public DbSet<Skill>? Skills { get; private set; }
         public DbSet<SkillUser>? SkillUsers { get; private set; }
         public DbSet<User>? Users { get; private set; }
-        public DbSet<Token> Tokens { get; private set; }
+        public DbSet<Models.Users.Token> Tokens { get; private set; }
         #endregion
 
         #region DbSet Camping
@@ -193,7 +193,7 @@ namespace webapi.Context
                 entity.HasKey(e => e.IdUser);
             });
 
-            modelBuilder.Entity<Token>(entity =>
+            modelBuilder.Entity<Models.Users.Token>(entity =>
             {
                 entity.HasKey(e => e.Id);
             });
