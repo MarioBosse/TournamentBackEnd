@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Reflection.Metadata.Ecma335;
 using webapi.Context;
 using webapi.Models;
 
@@ -17,18 +15,18 @@ namespace webapi.Controllers
             _roleContext = roleContext;
         }
         // Donne la liste de tous les courriels enregistrés
-        [Route("[controller]/All")]
+        [Route("Api/Login/All")]
         public ActionResult GetAll()
         {
             return Ok(new DbLink.Login(_roleContext).GetAlls());
         }
-        [Route("[controller]/Check")]
+        [Route("Api/Login/Check")]
         public ActionResult Check(LoginSend info)
         {
             return Ok(new DbLink.Login(_roleContext).CheckConnection(info));
         }
 
-        [Route("[controller]/Email")]
+        [Route("Api/Login/Email")]
         public ActionResult CheckEmail(EmailCheck courriel)
         {
             return Ok(new DbLink.Login(_roleContext).EmailExisting(courriel.Email));

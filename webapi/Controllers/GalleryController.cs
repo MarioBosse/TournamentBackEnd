@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using webapi.Context;
-using webapi.Models.Users;
 
 namespace webapi.Controllers
 {
@@ -13,18 +12,10 @@ namespace webapi.Controllers
             _roleContext = roleContext;
         }
 
-        [Route("[controler]/All")]
-        public List<String> GetAlls()
+        [Route("Api/Gallery/GetTournaments")]
+        public ActionResult GetAllTournaments()
         {
-            List<User> usr = new DbLink.Login(_roleContext).GetAlls();
-            List<String> result = new List<String>();
-
-            foreach(var user in usr)
-            {
-                result.Add(user.ProfilePhoto);
-            }
-
-            return result;
+            return Ok();
         }
     }
 }

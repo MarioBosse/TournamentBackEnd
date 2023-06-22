@@ -1,6 +1,4 @@
-﻿using webapi.Models.Address;
-using webapi.Models.Building;
-using webapi.Models.Camping;
+﻿using webapi.Models.Building;
 
 namespace webapi.Definitions
 {

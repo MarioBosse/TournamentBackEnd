@@ -1,4 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using MySql.EntityFrameworkCore.Extensions;
+
+
+
+
 using webapi.Definitions;
 using webapi.Models.Address;
 using webapi.Models.Building;

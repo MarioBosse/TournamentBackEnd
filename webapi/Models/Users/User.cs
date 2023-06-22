@@ -14,7 +14,8 @@ namespace webapi.Models.Users
         public string Gender { get; set; } = string.Empty;
         [Required]
         public string Password { get; set; } = string.Empty;
-        public string? ProfilePhoto { get; set; } = string.Empty;
+        [Column(TypeName = "LongBlob")]
+        public byte[]? ProfilePhoto { get; set; }
         public bool IsActivated { get; set; } = false;
         public string? PasswordResetCode { get; set; } = string.Empty;
         public string? ActivationCode { get; set; } = string.Empty;
