@@ -1,4 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using MySql.EntityFrameworkCore.Extensions;
+
+
+
+
 using webapi.Definitions;
 using webapi.Models.Address;
 using webapi.Models.Building;
@@ -31,13 +38,15 @@ namespace webapi.Context
             IsStarted = true;
         }
 
-
+        #region DbSet Address
         // Address
         public DbSet<Country>? Countries { get; private set; }
         public DbSet<Province>? Provinces { get; private set; }
         public DbSet<City>? Cities { get; private set; }
         public DbSet<Address>? Addresses { get; private set; }
+        #endregion
 
+        #region DbSet Roles
         // Roles
         public DbSet<Discipline>? Disciplines { get; private set; }
         public DbSet<DisciplineUser>? DisciplineUsers { get; private set; }
@@ -45,7 +54,9 @@ namespace webapi.Context
         public DbSet<ModelHasRoles>? ModelHasRoles { get; private set; }
         public DbSet<Role>? Roles { get; private set; }
         public DbSet<RoleHasPermission>? RoleHasPermissions { get; private set; }
+        #endregion
 
+        #region DbSet Tournaments
         // Tournaments
         public DbSet<Matchup>? Matchups { get; private set; }
         public DbSet<MatchupType>? matchupTypes { get; private set; }
@@ -56,16 +67,21 @@ namespace webapi.Context
         public DbSet<TournamentPeriod>? TournamentPeriods { get; private set; }
         public DbSet<TournamentPhaese>? TournamentPhaeses { get; private set; }
         public DbSet<TournamentType>? TournamentTypes { get; private set; }
+        #endregion
 
+        #region DbSet Users
         // Users
         public DbSet<Permission>? Permissions { get; private set; }
         public DbSet<Skill>? Skills { get; private set; }
         public DbSet<SkillUser>? SkillUsers { get; private set; }
         public DbSet<User>? Users { get; private set; }
+        public DbSet<Token> Tokens { get; private set; }
+        #endregion
 
+        #region DbSet Camping
         // Camping
         public DbSet<Terrain> Terrains { get; private set; }
-
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
@@ -74,6 +90,7 @@ namespace webapi.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Address
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Country>(entity =>
@@ -96,8 +113,8 @@ namespace webapi.Context
             {
                 entity.HasKey(e => e.IdAddress);
             });
-
-
+            #endregion
+            #region Roles
             modelBuilder.Entity<Discipline>(entity => {
                 entity.HasKey(e => e.IdDiscipline);
             });
@@ -121,8 +138,8 @@ namespace webapi.Context
             modelBuilder.Entity<RoleHasPermission>(entity => {
                 entity.HasKey(e => e.IdRolePermission);
             });
-
-
+            #endregion
+            #region Tournaments
             modelBuilder.Entity<Matchup>(entity => {
                 entity.HasKey(e => e.IdMatchup);
             });
@@ -158,8 +175,8 @@ namespace webapi.Context
             modelBuilder.Entity<TournamentType>(entity => {
                 entity.HasKey(e => e.IdTournamentType);
             });
-
-
+            #endregion
+            #region Users
             modelBuilder.Entity<Permission>(entity => {
                 entity.HasKey(e => e.IdPermission);
             });
@@ -176,14 +193,21 @@ namespace webapi.Context
                 entity.HasKey(e => e.IdUser);
             });
 
+            modelBuilder.Entity<Token>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+            });
+            #endregion
+            #region Terrains
             modelBuilder.Entity<Terrain>(entity => {
                 entity.HasKey(e => e.IdTerrain);
             });
+            #endregion
         }
 
         private void InitContent()
         {
-            foreach(TransitValue addr in new DbBaseCreationLists().Addresss)
+            foreach(TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
             {
                 AddLieu(addr.NamePlace, AddAddress(new TransAddress(addr.DoorNumber,
                                                                     addr.StreetName,
@@ -193,6 +217,16 @@ namespace webapi.Context
                                                                     AddVille(addr.City,
                                                                     AddProvince(addr.Province,
                                                                     AddCountry(addr.Pays))))));
+            }
+
+            foreach(TransitUserValue tuv in  new DbBaseCreationLists().Users)
+            {
+                AddUser(tuv);
+            }
+
+            foreach(TransitTournementType tt in new  DbBaseCreationLists().TournamentType)
+            {
+                AddTournamentType(tt);
             }
         }
         #region Country
@@ -296,6 +330,30 @@ namespace webapi.Context
             return GetAddress(ta);
         }
         #endregion
+        #region TournamentType
+        private Int64 GetTournamentType(TransitTournementType tt)
+        {
+            if(TournamentTypes == null || TournamentTypes.Count() == 0) return 0;
+            var test = TournamentTypes.Where(e => e.Name == tt.Name).FirstOrDefault();
+            if (test != null)
+                return test.IdTournamentType;
+            return 0;
+        }
+        private Int64 AddTournamentType(TransitTournementType tt)
+        {
+            if(tt == null) return 0;
+            var a = GetTournamentType(tt);
+            if(a == 0)
+            {
+                if (TournamentTypes != null) TournamentTypes.Add(new TournamentType()
+                {
+                    Name = tt.Name
+                });
+                SaveChanges();
+            }
+            return GetTournamentType(tt);
+        }
+        #endregion
         #region Nom de lieu
         private Int64 GetLieu(String Name, Int64 idAddress)
         {
@@ -314,6 +372,42 @@ namespace webapi.Context
                 SaveChanges();
             }
             return GetLieu(Name, Address);
+        }
+        #endregion
+        #region User
+        private Int64 GetUser(TransitUserValue tuv)
+        {
+            if (Users == null || Users.Count() == 0) return 0;
+            var test = Users.Where(e => e.FirstName == tuv.Firstname &&
+                                        e.LastName == tuv.Lastname &&
+                                        e.Gender == tuv.Gender &&
+                                        e.Email == tuv.Email &&
+                                        e.Password == tuv.Password).FirstOrDefault();
+            if (test != null)
+                return test.IdUser;
+            return 0;
+        }
+
+        private Int64 AddUser(TransitUserValue usersValue)
+        {
+            if (usersValue == null) return 0;
+            var a = GetUser(usersValue);
+            if (a == 0)
+            {
+                if (Users != null) Users.Add(new User()
+                {
+                    FirstName = usersValue.Firstname,
+                    LastName = usersValue.Lastname,
+                    Email = usersValue.Email,
+                    Password = usersValue.Password,
+                    Gender = usersValue.Gender,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    IsActivated = true
+                });
+                SaveChanges();
+            }
+            return GetUser(usersValue);
         }
         #endregion
     }

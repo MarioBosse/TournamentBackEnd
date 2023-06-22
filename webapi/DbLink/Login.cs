@@ -1,4 +1,6 @@
-﻿using webapi.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
+using webapi.Context;
 using webapi.Models;
 using webapi.Models.Users;
 
@@ -19,10 +21,9 @@ namespace webapi.DbLink
 
         public List<User> GetAlls()
         {
-            if (_roleContext == null || _roleContext.Users == null) return null;
-
-            return _roleContext.Users.Where(e => e.IdUser > 0).ToList<User>();
-
+            if (_roleContext == null || _roleContext.Users == null) return new List<User>();
+            var ret = _roleContext.Users.Where(e => e.IdUser > 0).ToList();
+            return ret;
         }
         public Boolean EmailExisting(String email)
         {
@@ -37,7 +38,7 @@ namespace webapi.DbLink
 
             var val = _roleContext.Users.Where(e => e.Email == loginSend.Email && e.Password == loginSend.Password).FirstOrDefault();
 
-            // Création d'un Token et enregistrement de celui-ci
+            // Si VAL != null, Création d'un Token et enregistrement de celui-ci
             return val;
         }
     }
