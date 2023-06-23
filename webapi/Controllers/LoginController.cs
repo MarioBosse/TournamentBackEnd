@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Reflection.Metadata.Ecma335;
 using webapi.Context;
 using webapi.Models;
 
@@ -9,21 +11,29 @@ namespace webapi.Controllers
     public class LoginController : ControllerBase
     {
         private readonly UserRoleContext _roleContext;
+        private readonly IConfiguration _configuration;
 
-        public LoginController(UserRoleContext roleContext)
+        public LoginController(UserRoleContext roleContext, IConfiguration configuration)
         {
             _roleContext = roleContext;
+            _configuration = configuration;
         }
         // Donne la liste de tous les courriels enregistrés
-        [Route("[controller]/All")]
-        public String GetAll()
+        [Route("Api/Login/All")]
+        public ActionResult GetAll()
         {
-            return "Login/GetAll\nVa donner la liste de tout le usager existant";
+            return Ok(new DbLink.Login(_roleContext, _configuration).GetAlls());
         }
-        [Route("[controller]/Check")]
-        public String Check(LoginSend info)
+        [Route("Api/Login/Check")]
+        public ActionResult Check(LoginSend info)
         {
-            return info.Courriel + '\n' + "Login/Check\nSi le client existe, retourne un TOKEN, sinon," + '\n' + "retourne FALSE pour effectuer la création d'un nouveu profil";
+            return Ok(new DbLink.Login(_roleContext, _configuration).CheckConnection(info));
+        }
+
+        [Route("Api/Login/Email")]
+        public ActionResult CheckEmail(EmailCheck courriel)
+        {
+            return Ok(new DbLink.Login(_roleContext, _configuration).EmailExisting(courriel.Email));
         }
     }
 }

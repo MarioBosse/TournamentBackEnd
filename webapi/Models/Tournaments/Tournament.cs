@@ -7,8 +7,7 @@ namespace webapi.Models.Tournaments
     {
         public Int64 IdTournament { get; set; }
         public Int64 IdTournamentType { get; set; }
-        public String Name { get; set; }
-
-        public virtual TournamentType TournamentType { get; set; }
+        public String Name { get; set; } = String.Empty;
+        public Byte[]? Picture { get; set; }
     }
 }
