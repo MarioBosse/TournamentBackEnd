@@ -36,7 +36,7 @@ namespace webapi.DbLink
             return _roleContext.Users.Where(e => e.Email == email).Any();
         }
 
-        public TokenRead CheckConnection(LoginSend loginSend)
+        public TokenRead? CheckConnection(LoginSend loginSend)
         {
             if (_roleContext == null || _roleContext.Users == null) return null;
 

@@ -1,4 +1,5 @@
-﻿using JWT.Algorithms;
+﻿using JWT;
+using JWT.Algorithms;
 using JWT.Builder;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
@@ -61,6 +62,11 @@ namespace webapi.Token
             dateTime = dateTime.AddSeconds(Convert.ToDateTime(life).Second);
 
             return dateTime;
+        }
+
+        public Boolean IsValidToken(String token)
+        {
+            return false;
         }
     }
 }
