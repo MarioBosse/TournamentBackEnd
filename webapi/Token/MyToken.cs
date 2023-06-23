@@ -1,9 +1,11 @@
 ﻿using JWT;
 using JWT.Algorithms;
 using JWT.Builder;
+using JWT.Serializers;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using webapi.Context;
+using webapi.Models.Repository.Token;
 using webapi.Models.Users;
 
 
@@ -33,11 +35,11 @@ namespace webapi.Token
         {
             _user = user;
             string token = JwtBuilder.Create()
-                                        .WithAlgorithm(new HMACSHA256Algorithm())
-                                        .WithSecret(userSecretKey)
-                                        .AddClaim("exp", DateTimeOffset.UtcNow.AddTicks(lapsedtime.Ticks).ToUnixTimeSeconds())
-                                        .AddClaim("user", _user)
-                                        .Encode();
+                                     .WithAlgorithm(new HMACSHA256Algorithm())
+                                     .WithSecret(userSecretKey)
+                                     .AddClaim("exp", DateTimeOffset.UtcNow.AddTicks(lapsedtime.Ticks).ToUnixTimeSeconds())
+                                     .AddClaim("user", new LoginToken(user))
+                                     .Encode();
             return token;
         }
 
@@ -66,6 +68,16 @@ namespace webapi.Token
 
         public Boolean IsValidToken(String token)
         {
+            IJsonSerializer serializer = new JsonNetSerializer();
+            IDateTimeProvider provider = new UtcDateTimeProvider();
+            IJwtValidator validator = new JwtValidator(serializer, provider);
+            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
+            IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
+
+            var json = decoder.Decode(token);
+            Console.WriteLine(json);
+            
             return false;
         }
     }
