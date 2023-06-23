@@ -7,7 +7,6 @@ namespace webapi.Models.Users
     {
         public Int64 Id { get; set; }
         public Int64 IdUser { get; set; }
-        public String UserToken { get; set; } = String.Empty;
-        public DateTime ValidUpto { get; set; }
+        public String SecurityToken { get; set; } = String.Empty;
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.Entity;
 using webapi.Context;
 using webapi.Models;
+using webapi.Models.CRUD.Token;
 using webapi.Models.Users;
 using webapi.Token;
 
@@ -35,19 +36,22 @@ namespace webapi.DbLink
             return _roleContext.Users.Where(e => e.Email == email).Any();
         }
 
-        public Models.Users.Token? CheckConnection(LoginSend loginSend)
+        public TokenRead CheckConnection(LoginSend loginSend)
         {
             if (_roleContext == null || _roleContext.Users == null) return null;
+
+            TokenRead TR = new TokenRead();
 
             var val = _roleContext.Users.Where(e => e.Email == loginSend.Email && e.Password == loginSend.Password).FirstOrDefault();
 
             if (val == null) return null;
 
-            var myT = new MyToken(_configuration);
+            var myT = new MyToken(_roleContext, _configuration);
             var tok = myT.GetToken(val);
-            var t = new Models.Users.Token();
-            t.IdUser = val.IdUser;
-            return t;
+
+            TR.Token = tok;
+            TR.Email = loginSend.Email;
+            return TR;
         }
     }
 }

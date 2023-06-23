@@ -2,6 +2,7 @@
 using JWT.Builder;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
+using webapi.Context;
 using webapi.Models.Users;
 
 
@@ -13,34 +14,42 @@ namespace webapi.Token
         private String userSecretKey { get; set; } = String.Empty;
         private DateTime lapsedtime { get; set; }
         private User _user { get; set; }
+        private UserRoleContext _context { get; set; }
 
-        private void BuildSecretKe()
+        private String BuildSecretKey()
         {
-            var hmac = new HMACSHA256();
-            userSecretKey = Convert.ToBase64String(hmac.Key);
+            var sec = new DbLink.Token(_context).GetSecurityKey(_user);
+
+            if (sec == "")
+            {
+                userSecretKey = Convert.ToBase64String(new HMACSHA256().Key);
+                return new DbLink.Token(_context).AddSecurityKey(_user.IdUser, userSecretKey);
+            }
+            return sec;
         }
 
-        private void BuildToken()
+        private String BuildToken(User user)
         {
+            _user = user;
             string token = JwtBuilder.Create()
                                         .WithAlgorithm(new HMACSHA256Algorithm())
                                         .WithSecret(userSecretKey)
                                         .AddClaim("exp", DateTimeOffset.UtcNow.AddTicks(lapsedtime.Ticks).ToUnixTimeSeconds())
+                                        .AddClaim("user", _user)
                                         .Encode();
-
-            Console.WriteLine(token);
+            return token;
         }
 
         public String GetToken(User user)
         {
             _user = user;
-            BuildSecretKe();
-            BuildToken();
-
-            return WrapPayload(user).Payload;
+            userSecretKey = BuildSecretKey();
+            return BuildToken(_user);
         }
-        public MyToken(IConfiguration configuration)
+
+        public MyToken(UserRoleContext context, IConfiguration configuration)
         {
+            _context = context;
             lapsedtime = SetLifetime(Convert.ToDateTime(configuration.GetValue<String>("TokenLifetime")));
         }
 
@@ -52,14 +61,6 @@ namespace webapi.Token
             dateTime = dateTime.AddSeconds(Convert.ToDateTime(life).Second);
 
             return dateTime;
-        }
-
-        private PayloadStruct WrapPayload(Object obj)
-        {
-            PayloadStruct payload = new PayloadStruct();
-            payload.Payload = JsonConvert.SerializeObject(obj);
-            payload.Type = obj.GetType().Name;
-            return payload;
         }
     }
 }
