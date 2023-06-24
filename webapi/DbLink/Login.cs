@@ -39,6 +39,7 @@ namespace webapi.DbLink
                                               LastName = user.LastName,
                                               Email = user.Email,
                                               Gender = user.Gender,
+                                              Birthdate = user.Birthdate,
                                               IsActivated = user.IsActivated,
                                               ProfilePhoto = user.ProfilePhoto,
                                               Address = new DataObjectTransfert().GetAddress(ad, _roleContext)
