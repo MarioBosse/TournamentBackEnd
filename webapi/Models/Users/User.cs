@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,6 +13,7 @@ namespace webapi.Models.Users
         [Required]
         public string Email { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
+        public DateTime? Birthdate { get; set; }
         [Required]
         public string Password { get; set; } = string.Empty;
         [Column(TypeName = "LongBlob")]
