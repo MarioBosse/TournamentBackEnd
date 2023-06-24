@@ -8,8 +8,5 @@ namespace webapi.Models.Users
     {
         public long IdDiscipline { get; set; }
         public long IdUser { get; set; }
-
-        public virtual Discipline Discipline { get; set; }
-        public virtual User User { get; set; }
     }
 }

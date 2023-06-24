@@ -16,13 +16,14 @@ namespace webapi.Token
     {
         private String userSecretKey { get; set; } = String.Empty;
         private DateTime lapsedtime { get; set; }
-        private User _user { get; set; }
+        private User? _user { get; set; }
         private UserRoleContext _context { get; set; }
 
         private String BuildSecretKey()
         {
-            var sec = new DbLink.Token(_context).GetSecurityKey(_user);
+            if(_user == null) { return String.Empty; }
 
+            var sec = new DbLink.Token(_context).GetSecurityKey(_user);
             if (sec == "")
             {
                 userSecretKey = Convert.ToBase64String(new HMACSHA256().Key);

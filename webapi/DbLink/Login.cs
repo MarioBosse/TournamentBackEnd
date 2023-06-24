@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity;
 using webapi.Context;
-using webapi.Models;
 using webapi.Models.CRUD.Token;
+using webapi.Models.Repository;
+using webapi.Models.Repository.Login;
 using webapi.Models.Users;
 using webapi.Token;
 
@@ -23,20 +24,38 @@ namespace webapi.DbLink
             get;
         }
 
-        public List<User> GetAlls()
+        public List<AllUsers> GetAlls()
         {
-            if (_roleContext == null || _roleContext.Users == null) return new List<User>();
-            var ret = _roleContext.Users.Where(e => e.IdUser > 0).ToList();
-            return ret;
+            if (_roleContext == null || _roleContext.Users == null || _roleContext.Addresses == null) return new List<AllUsers>();
+            var alls = _roleContext.Users.Where(e => e.IdUser > 0).ToList();
+
+            List<AllUsers> allUsers = new List<AllUsers>();
+            foreach(var user in alls)
+            {
+                var ad = _roleContext.Addresses.Where(e => e.IdAddress == user.IdAddress).FirstOrDefault();
+                if (ad == null) continue;
+
+                allUsers.Add(new AllUsers() { FirstName = user.FirstName,
+                                              LastName = user.LastName,
+                                              Email = user.Email,
+                                              Gender = user.Gender,
+                                              IsActivated = user.IsActivated,
+                                              ProfilePhoto = user.ProfilePhoto,
+                                              Address = new DataObjectTransfert().GetAddress(ad, _roleContext)
+                });
+            }
+            return allUsers;
         }
-        public Boolean EmailExisting(String email)
+        public VraiFaux EmailExisting(String email)
         {
-            if(_roleContext == null || _roleContext.Users == null) return false;
+            var VF = new VraiFaux();
+            if (_roleContext == null || _roleContext.Users == null) { VF.Value = false; return VF; }
 
-            return _roleContext.Users.Where(e => e.Email == email).Any();
+            VF.Value = _roleContext.Users.Where(e => e.Email == email).Any();
+            return VF;
         }
 
-        public TokenRead? CheckConnection(LoginSend loginSend)
+        public TokenRead? GetConnection(LoginSend loginSend)
         {
             if (_roleContext == null || _roleContext.Users == null) return null;
 

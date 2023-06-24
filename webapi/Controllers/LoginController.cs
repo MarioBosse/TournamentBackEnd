@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Reflection.Metadata.Ecma335;
 using webapi.Context;
-using webapi.Models;
+using webapi.DbLink;
+using webapi.Models.Repository.Login;
+using webapi.Models.Repository.Token;
 
 namespace webapi.Controllers
 {
@@ -24,10 +26,17 @@ namespace webapi.Controllers
         {
             return Ok(new DbLink.Login(_roleContext, _configuration).GetAlls());
         }
-        [Route("Api/Login/Check")]
-        public ActionResult Check(LoginSend info)
+
+        [Route("Api/Login/CreateConnexion")]
+        public ActionResult CreateConnexion(LoginSend info)
         {
-            return Ok(new DbLink.Login(_roleContext, _configuration).CheckConnection(info));
+            return Ok(new DbLink.Login(_roleContext, _configuration).GetConnection(info));
+        }
+
+        [Route("Api/Login/IsValidConnexion")]
+        public ActionResult IsValidConnection(CheckConnexion info)
+        {
+            return Ok();
         }
 
         [Route("Api/Login/Email")]
