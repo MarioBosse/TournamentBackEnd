@@ -14,6 +14,9 @@ namespace webapi.DbLink
         public String GetSecurityKey(User user)
         {
             if (_roleContext.Tokens.Count() == 0) return "";
+
+            var sec = new Token(_roleContext).GetSecurityKey(user);
+
             var usr = _roleContext.Tokens.Where(e => e.IdUser == user.IdUser).FirstOrDefault();
             return (usr != null ? usr.SecurityToken : "");
         }

@@ -6,6 +6,6 @@ namespace webapi.Models.Tournaments
     public class TournamentType
     {
         public Int64 IdTournamentType { get; set; }
-        public String Name { get; set; }
+        public String Name { get; set; } = String.Empty;
     }
 }
