@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Reflection.Metadata.Ecma335;
 using webapi.Context;
 using webapi.DbLink;
+using webapi.Models.CRUD.Token;
 using webapi.Models.Repository.Login;
 using webapi.Models.Repository.Token;
 
@@ -34,9 +35,9 @@ namespace webapi.Controllers
         }
 
         [Route("Api/Login/IsValidConnexion")]
-        public ActionResult IsValidConnection(CheckConnexion info)
+        public ActionResult IsValidConnection(TokenRead info)
         {
-            return Ok();
+            return Ok(new DbLink.Login(_roleContext, _configuration).IsConnexionValid(info));
         }
 
         [Route("Api/Login/Email")]
