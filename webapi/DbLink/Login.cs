@@ -1,11 +1,13 @@
 using AuthenticationService.Managers;
 using AuthenticationService.Models;
 using AuthenticationService.Token;
+using Org.BouncyCastle.Security;
 using System.Security.Claims;
 using webapi.Context;
 using webapi.Models.CRUD.Token;
 using webapi.Models.Repository;
 using webapi.Models.Repository.Login;
+using webapi.Models.Repository.Token;
 
 namespace webapi.DbLink
 {
@@ -92,11 +94,68 @@ namespace webapi.DbLink
         {
             return claims.AsEnumerable();
         }
-        public TokenRead? IsConnexionValid(TokenRead tokenRead)
+        public TokenValidation? IsConnexionValid(TokenRead tokenRead)
         {
-            GenToken tok = new GenToken(_configuration, tokenRead.Token);
-            var ret = tok.IsValidToken(tokenRead.Token);
+            bool GotEmail = false;
+            bool validEmail = false;
+
+            bool GotKey = false;
+            bool validKey = false;
+
+            if (_roleContext == null) return null;
+            if (_roleContext.Users == null) return null;
+
+            Models.Users.Token? secretKey = _roleContext.Tokens.Where(t => t.IdUser == (Int64)_roleContext.Users.Where(e => e.Email == tokenRead.Email).FirstOrDefault().IdUser).FirstOrDefault();
+            if (secretKey == null) return null;
+
+            if(new JWTService(secretKey.SecurityToken).IsTokenValid(tokenRead.Token))
+            {
+                IEnumerable<Claim> cls = new JWTService(secretKey.SecurityToken).GetTokenClaims(tokenRead.Token);
+                List<Claim> lCls = cls.ToList();
+                foreach (Claim c in lCls)
+                {
+                    if (GotEmail == false && IsEmailValid(c, tokenRead.Email))
+                    {
+                        GotEmail = true;
+                        if(c.Value == tokenRead.Email)
+                            validEmail = true;
+                        continue;
+                    }
+                    if(GotKey == false && IsTokenValid(c, tokenRead.Token))
+                    {
+                        GotKey = true;
+                        if(c.Value == secretKey.SecurityToken)
+                            validKey = true;
+                        continue;
+                    }
+                    if(validEmail && validKey)
+                    {
+                        if(IsTimeValid(c))
+                            return (new TokenValidation() { IsValid = true });
+                    }
+                }
+            }
             return null;
+        }
+
+        private bool IsTokenValid(Claim c, string token)
+        {
+            return (c.Type == "Token" ? true : false);
+        }
+        private bool IsEmailValid(Claim c, string email)
+        {
+            return c.Type.Contains("email");
+        }
+
+        private bool IsTimeValid(Claim c)
+        {
+            if (c.Type == "exp")
+            {
+                var exp = DateTimeOffset.FromUnixTimeSeconds(long.Parse(c.Value));
+                if (exp.DateTime > DateTime.Now)
+                    return true;
+            }
+            return false;
         }
     }
 }
