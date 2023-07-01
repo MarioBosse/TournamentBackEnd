@@ -13,11 +13,5 @@ namespace webapi.Models.Tournaments
         public Int64 IdTeamLocal { get; set; }
         public Int16 ScoreVisitor { get; set; }
         public Int16 ScoreLocal { get; set; }
-
-        public virtual Tournament Tournament { get; set; }
-        public virtual MatchupType MatchupType { get; set; }
-        public virtual TournamentPhaese TournamentPhaese { get; set; }
-        public virtual Team TeamVisitor { get; set; }
-        public virtual Team TeamLocal { get; set; }
     }
 }

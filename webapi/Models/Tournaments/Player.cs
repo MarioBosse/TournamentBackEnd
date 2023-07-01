@@ -9,8 +9,5 @@ namespace webapi.Models.Tournaments
         public Int64 IdPlayer { get; set; }
         public Int64 IdTeam { get; set; }
         public Int64 IdUser { get; set; }
-
-        public virtual Team Team { get; set; }
-        public virtual User User { get; set; }
     }
 }

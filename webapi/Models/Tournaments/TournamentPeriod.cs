@@ -8,8 +8,6 @@ namespace webapi.Models.Tournaments
     {
         public Int64 IdTournamentPeriod { get; set; }
         public Int64 IdTournament { get; set; }
-        public String Name { get; set; }
-
-        public virtual Tournament Tournament { get; set; }
+        public String Name { get; set; } = String.Empty;
     }
 }
