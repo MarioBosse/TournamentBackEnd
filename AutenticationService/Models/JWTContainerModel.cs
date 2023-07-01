@@ -10,7 +10,7 @@ namespace AuthenticationService.Models
         public string SecretKey { get; set; } = "TW9zaGVFcmV6UHJpdmF0ZUtleQ=="; // This secret key should be moved to some configurations outter server.
         public string SecurityAlgorithm { get; set; } = SecurityAlgorithms.HmacSha256Signature;
 
-        public Claim[] Claims { get; set; }
+        public Claim[]? Claims { get; set; } = null;
         #endregion
     }
 }
