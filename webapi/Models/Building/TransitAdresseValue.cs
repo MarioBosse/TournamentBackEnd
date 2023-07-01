@@ -1,6 +1,6 @@
 ﻿namespace webapi.Models.Building
 {
-    public class TransitValue
+    public class TransitAdresseValue
     {
         public String NamePlace { get; set; } = String.Empty;
         public String DoorNumber { get; set; } = String.Empty;
