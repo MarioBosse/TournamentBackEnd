@@ -1,4 +1,4 @@
-﻿using webapi.Models.Building;
+﻿using webapi.Models.Database.Building;
 
 namespace webapi.Definitions
 {

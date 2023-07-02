@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Reflection.Metadata.Ecma335;
 using webapi.Context;
 using webapi.DbLink;
-using webapi.Models.CRUD.Token;
 using webapi.Models.Repository.Login;
 using webapi.Models.Repository.Token;
 
@@ -26,9 +23,9 @@ namespace webapi.Controllers
 
         #region Api/Login/All
         [Route("All")]
-        public ActionResult GetAll()
+        public ActionResult GetAll(TokenCheck token)
         {
-            return Ok(new DbLink.Login(_roleContext, _configuration).GetAlls());
+            return Ok(new Login(_roleContext, _configuration).GetAlls(token));
         }
         #endregion
         #region Api/Login/CreateConnexion
@@ -40,7 +37,7 @@ namespace webapi.Controllers
         #endregion
         #region Api/Login/IsValidConnexion
         [Route("IsValidConnexion")]
-        public ActionResult IsValidConnection(TokenRead info)
+        public ActionResult IsValidConnection(TokenCheck info)
         {
             return Ok(new DbLink.Login(_roleContext, _configuration).IsConnexionValid(info));
         }

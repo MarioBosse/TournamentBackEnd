@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using webapi.Context;
 using webapi.DbLink;
+using webapi.Models.Repository.Token;
 using webapi.Models.Repository.Tournament.Types;
 
 namespace webapi.Controllers
@@ -20,14 +22,14 @@ namespace webapi.Controllers
         }
 
         [Route("Type/AllTypes")]
-        public ActionResult GetAllTypes()
+        public ActionResult GetAllTypes(TokenCheck tokenCheck)
         {
-            return Ok(new Tournament(_roleContext, _configuration).GetAllTypes());
+            return Ok(JsonConvert.SerializeObject(new Tournament(_roleContext, _configuration).GetAllTypes(tokenCheck)));
         }
         [Route("Type/Add")]
-        public ActionResult TournamentTypeAdd(TournamentTypeAdd type)
+        public ActionResult TournamentTypeAdd(TournamentTypeAddRead type)
         {
-            return Ok(new Tournament(_roleContext, _configuration).TournamentTypeAdd(type.TypeName));
+            return Ok(new Tournament(_roleContext, _configuration).TournamentTypeAdd(type));
         }
         [Route("Type/Delete")]
         public ActionResult TournamentTypeDelete()

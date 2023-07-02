@@ -1,5 +1,5 @@
 ﻿using webapi.Context;
-using webapi.Models.Users;
+using webapi.Models.Database.Users;
 
 namespace webapi.DbLink
 {
@@ -23,7 +23,7 @@ namespace webapi.DbLink
 
         public String AddSecurityKey(Int64 userId, String securityKey)
         {
-            _roleContext.Tokens.Add(new Models.Users.Token() { IdUser = userId, SecurityToken = securityKey });
+            _roleContext.Tokens.Add(new Models.Database.Users.Token() { IdUser = userId, SecurityToken = securityKey });
             _roleContext.SaveChanges();
             return securityKey;
         }
