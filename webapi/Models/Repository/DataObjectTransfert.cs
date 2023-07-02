@@ -4,7 +4,7 @@ namespace webapi.Models.Repository
 {
     public class DataObjectTransfert
     {
-        public Login.Complements.Address? GetAddress(Address.Address address, UserRoleContext context)
+        public Login.Complements.Address? GetAddress(Database.Address.Address address, UserRoleContext context)
         {
             if (context == null) return null;
 

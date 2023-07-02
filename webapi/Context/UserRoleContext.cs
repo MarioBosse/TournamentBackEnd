@@ -7,12 +7,12 @@ using MySql.EntityFrameworkCore.Extensions;
 
 
 using webapi.Definitions;
-using webapi.Models.Address;
-using webapi.Models.Building;
-using webapi.Models.Camping;
-using webapi.Models.Tournaments;
-using webapi.Models.Users;
-using webapi.Models.UsersRoles;
+using webapi.Models.Database.Address;
+using webapi.Models.Database.Building;
+using webapi.Models.Database.Camping;
+using webapi.Models.Database.Roles;
+using webapi.Models.Database.Tournaments;
+using webapi.Models.Database.Users;
 
 namespace webapi.Context
 {
@@ -75,7 +75,7 @@ namespace webapi.Context
         public DbSet<Skill>? Skills { get; private set; }
         public DbSet<SkillUser>? SkillUsers { get; private set; }
         public DbSet<User>? Users { get; private set; }
-        public DbSet<Models.Users.Token> Tokens { get; private set; }
+        public DbSet<Token> Tokens { get; private set; }
         #endregion
 
         #region DbSet Camping
@@ -193,7 +193,7 @@ namespace webapi.Context
                 entity.HasKey(e => e.IdUser);
             });
 
-            modelBuilder.Entity<Models.Users.Token>(entity =>
+            modelBuilder.Entity<Token>(entity =>
             {
                 entity.HasKey(e => e.Id);
             });

@@ -94,9 +94,9 @@ namespace AuthenticationService.Managers
                 ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
                 return tokenValid.Claims;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new ArgumentException();
             }
         }
         #endregion
