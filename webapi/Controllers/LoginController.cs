@@ -11,6 +11,7 @@ namespace webapi.Controllers
 {
 
     [ApiController]
+    [Route("Api/Login/")]
     public class LoginController : ControllerBase
     {
         private readonly UserRoleContext _roleContext;
@@ -22,28 +23,34 @@ namespace webapi.Controllers
             _configuration = configuration;
         }
         // Donne la liste de tous les courriels enregistrés
-        [Route("Api/Login/All")]
+
+        #region Api/Login/All
+        [Route("All")]
         public ActionResult GetAll()
         {
             return Ok(new DbLink.Login(_roleContext, _configuration).GetAlls());
         }
-
-        [Route("Api/Login/CreateConnexion")]
+        #endregion
+        #region Api/Login/CreateConnexion
+        [Route("CreateConnexion")]
         public ActionResult CreateConnexion(LoginSend info)
         {
             return Ok(new DbLink.Login(_roleContext, _configuration).GetConnection(info));
         }
-
-        [Route("Api/Login/IsValidConnexion")]
+        #endregion
+        #region Api/Login/IsValidConnexion
+        [Route("IsValidConnexion")]
         public ActionResult IsValidConnection(TokenRead info)
         {
             return Ok(new DbLink.Login(_roleContext, _configuration).IsConnexionValid(info));
         }
-
-        [Route("Api/Login/Email")]
+        #endregion
+        #region Api/Login/Email
+        [Route("Email")]
         public ActionResult CheckEmail(EmailCheck courriel)
         {
             return Ok(new DbLink.Login(_roleContext, _configuration).EmailExisting(courriel.Email));
         }
+        #endregion
     }
 }
