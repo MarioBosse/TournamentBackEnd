@@ -8,4 +8,10 @@ namespace webapi.Models.Repository.Tournament.TypesRetour
         public string Name { get; set; } = String.Empty;
         public TokenConnexion Validation { get; set; } = new TokenConnexion();
     }
+
+    public class Delete
+    {
+        public bool DeleteDone { get; set; } = false;
+        public TokenConnexion Validation { get; set; } = new TokenConnexion();
+    }
 }

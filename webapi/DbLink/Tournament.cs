@@ -31,7 +31,24 @@ namespace webapi.DbLink
             };
             return r;
         }
+        public Delete? TournamentTypeDelete(TournamentTypeDelete deleteType)
+        {
+            TokenConnexion token = new ConnexionState(_roleContext, _configuration).GetConnexionState(deleteType.tokenCheck);
+            TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(deleteType.tokenCheck);
+            if (isValide == null || !isValide.IsValid) return (new Delete() { Validation = token });
 
+            if (_roleContext == null || _roleContext.TournamentTypes == null) return null;
+            TournamentType? tourType = new TournamentType();
+            if (deleteType.tournamentType.Name.Length > 1)
+                tourType = _roleContext.TournamentTypes.Where(t => t.Name == deleteType.tournamentType.Name).FirstOrDefault();
+            else if (deleteType.tournamentType.IdTournamentType > 0)
+                tourType = _roleContext.TournamentTypes.Where(e => e.IdTournamentType == deleteType.tournamentType.IdTournamentType).FirstOrDefault();
+            if(tourType == null) return new Delete() { Validation = token, DeleteDone = false };
+
+            var result = _roleContext.TournamentTypes.Remove(tourType);
+            Delete? delete = new Delete() { Validation = token, DeleteDone = true };
+            return delete;
+        }
         public Add? TournamentTypeAdd(TournamentTypeAddRead ajoutType)
         {
             TokenConnexion token = new ConnexionState(_roleContext, _configuration).GetConnexionState(ajoutType.tokenCheck);
@@ -48,7 +65,7 @@ namespace webapi.DbLink
             add.Validation = token;
             return add;
         }
-        public Add? TournamenetTypeModify(TournamentTypeModify data)
+        public Add? TournamentTypeModify(TournamentTypeModify data)
         {
             TokenConnexion token = new ConnexionState(_roleContext, _configuration).GetConnexionState(data.TokenCheck);
             TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(data.TokenCheck);

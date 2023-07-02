@@ -14,13 +14,14 @@ namespace webapi.Controllers
     {
         private readonly UserRoleContext _roleContext;
         private readonly IConfiguration _configuration;
-
+        #region Constructeur
         public TournoisController(UserRoleContext roleContext, IConfiguration configuration)
         {
             _roleContext = roleContext;
             _configuration = configuration;
         }
-
+        #endregion
+        #region Tournament/Type
         [Route("Type/AllTypes")]
         public ActionResult GetAllTypes(TokenCheck tokenCheck)
         {
@@ -32,19 +33,20 @@ namespace webapi.Controllers
             return Ok(new Tournament(_roleContext, _configuration).TournamentTypeAdd(type));
         }
         [Route("Type/Delete")]
-        public ActionResult TournamentTypeDelete()
+        public ActionResult TournamentTypeDelete(TournamentTypeDelete delete)
         {
-            return Ok();
+            return Ok(new Tournament(_roleContext, _configuration).TournamentTypeDelete(delete));
         }
         [Route("Type/Modify")]
         public ActionResult TournamentTypeModify(TournamentTypeModify modify)
         {
-            return Ok(new Tournament(_roleContext, _configuration).TournamenetTypeModify(modify));
+            return Ok(new Tournament(_roleContext, _configuration).TournamentTypeModify(modify));
         }
         [Route("Type/Read")]
         public ActionResult TournamentTypeRead()
         {
             return Ok();
         }
+        #endregion
     }
 }

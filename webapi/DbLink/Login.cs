@@ -18,14 +18,6 @@ namespace webapi.DbLink
             _roleContext = roleContext;
             _configuration = configuration;
         }
-        public TokenValidation? IsConnected(TokenCheck tokenCheck)
-        {
-            TokenConnexion? token = new ConnexionState(_roleContext, _configuration).GetConnexionState(tokenCheck);
-            TokenValidation isValide = new TokenValidation();
-            isValide.Validation = token;
-            isValide.IsValid = token.IsConnected;
-            return isValide;
-        }
         public GetAlls? GetAlls(TokenCheck token)
         {
             TokenConnexion tokenC = new ConnexionState(_roleContext, _configuration).GetConnexionState(token);
