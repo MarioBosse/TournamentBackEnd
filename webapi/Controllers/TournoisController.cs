@@ -35,9 +35,9 @@ namespace webapi.Controllers
             return Ok();
         }
         [Route("Type/Modify")]
-        public ActionResult TournamentTypeModify()
+        public ActionResult TournamentTypeModify(TournamentTypeModify modify)
         {
-            return Ok();
+            return Ok(new Tournament(_roleContext, _configuration).TournamenetTypeModify(modify));
         }
         [Route("Type/Read")]
         public ActionResult TournamentTypeRead()

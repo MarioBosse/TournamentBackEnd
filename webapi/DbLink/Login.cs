@@ -102,8 +102,7 @@ namespace webapi.DbLink
             bool GotKey = false;
             bool validKey = false;
 
-            if (_roleContext == null) return null;
-            if (_roleContext.Users == null) return null;
+            if (_roleContext == null || _roleContext.Users == null || tokenRead == null) return null;
 
             Models.Users.Token? secretKey = _roleContext.Tokens.Where(t => t.IdUser == (Int64)_roleContext.Users.Where(e => e.Email == tokenRead.Email).FirstOrDefault().IdUser).FirstOrDefault();
             if (secretKey == null) return null;
