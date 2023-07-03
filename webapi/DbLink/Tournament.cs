@@ -114,9 +114,12 @@ namespace webapi.DbLink
             if (_roleContext == null || _roleContext.Tournaments == null) return null;
 
             List<Models.Database.Tournaments.Tournament> test = _roleContext.Tournaments.Where(e => e.IdTournament > 0).ToList();
+            var allT = _roleContext.Tournaments.Where(e => e.IdTournament > 0).ToList();
+            if (allT == null) return null;
+
             var r = new GetAll()
             {
-                Tournaments = GetInfo(_roleContext.Tournaments.Where(e => e.IdTournament > 0).ToList()),
+                Tournaments = GetInfo(allT),
                 Validation = token
             };
             return r;
@@ -139,22 +142,24 @@ namespace webapi.DbLink
             Delete? delete = new Delete() { Validation = token, Deleted = true };
             return delete;
         }
-        public Add? TournamentAdd(ReadTournament Tournament)
+        public Add? TournamentAdd(Definition Tournament)
         {
-            TokenConnexion token = new ConnexionState(_roleContext, _configuration).GetConnexionState(addTournament.tokenCheck);
-            TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(addTournament.tokenCheck);
+            TokenConnexion token = new ConnexionState(_roleContext, _configuration).GetConnexionState(Tournament.Validation);
+            TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(Tournament.Validation);
             if (isValide == null || !isValide.IsValid) return (new Add() { Validation = token });
 
             if (_roleContext == null || _roleContext.Tournaments == null) return null;
             _roleContext.Tournaments.Add(new Models.Database.Tournaments.Tournament()
             {
-                IdTournamentType = addTournament.tournament.IdTournament,
-                Name = addTournament.tournament.Name,
-                Picture = addTournament.tournament.Picture
+                IdTournamentType = Tournament.Tournament.IdTournament,
+                Name = Tournament.Tournament.Name,
+                Picture = Tournament.Tournament.Picture
             });
             _roleContext.SaveChanges();
 
-            Models.Database.Tournaments.Tournament? a = _roleContext.Tournaments.Where(e => e.Name == addTournament.Name).FirstOrDefault();
+            Models.Database.Tournaments.Tournament? a = _roleContext.Tournaments.Where(e => e.Name == Tournament.Tournament.Name).FirstOrDefault();
+            if(a == null || a.Picture == null) return null;
+
             Add add = new Add()
             {
                 Validation = token,
@@ -172,10 +177,12 @@ namespace webapi.DbLink
             if (isValide == null || !isValide.IsValid) return (new Add() { Validation = token });
 
             if (_roleContext == null || _roleContext.Tournaments == null) return null;
-            var rec = _roleContext.Tournaments.Where(e => e.Name == data.Origin).FirstOrDefault();
+            var rec = _roleContext.Tournaments.Where(e => e.Name == data.Origin.Name).FirstOrDefault();
+            if (rec == null || rec.Picture == null) return null;
+
             if (rec != null)
             {
-                rec.Name = data.Destination;
+                rec.Name = data.NewName;
                 _roleContext.Tournaments.Update(rec);
                 _roleContext.SaveChanges();
 
@@ -183,7 +190,7 @@ namespace webapi.DbLink
                 {
                     idTournament = rec.IdTournament,
                     idTournamentType = rec.IdTournamentType,
-                    Name = data.Destination,
+                    Name = data.NewName,
                     Picture = rec.Picture,
                     Validation = token
                 };
@@ -195,21 +202,23 @@ namespace webapi.DbLink
         private List<ReadTournament>? GetInfo(List<Models.Database.Tournaments.Tournament> tournaments)
         {
             if(tournaments == null) return null;
-            if (_roleContext == null || _roleContext.Tournaments == null) return null;
+            if (_roleContext == null || _roleContext.TournamentTypes == null || _roleContext.Tournaments == null) return null;
 
             List<ReadTournament> infos = new List<ReadTournament>();
             foreach (var tournament in tournaments)
             {
                 Models.Database.Tournaments.Tournament? rec = _roleContext.Tournaments.Where(e => e.IdTournament == tournament.IdTournament).FirstOrDefault();
 
-                if (rec == null) return null;
+                var tType = _roleContext.TournamentTypes.Where(e => e.IdTournamentType == tournament.IdTournament).FirstOrDefault();
+                if (rec == null || tType == null) return null;
+
                 ReadTournament nouv = new ReadTournament()
                 {
                     IdTournament = tournament.IdTournament,
                     Name = tournament.Name,
-                    IdTournamentType = tournament.IdTournamentType,
+                    tournamentType = tType,
                     Picture = tournament.Picture,
-                    TournamentType = rec
+                    TournamentType = tType.Name
                 };
                 infos.Add(nouv);
             }

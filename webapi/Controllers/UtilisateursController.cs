@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Context;
+using webapi.Models.Repository.Token;
 
 namespace webapi.Controllers
 {
@@ -26,5 +27,9 @@ namespace webapi.Controllers
         [Route("User/")]
         [Route("User/")]
         [Route("User/")]
+        public ActionResult UserXX(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
     }
 }
