@@ -48,5 +48,32 @@ namespace webapi.Controllers
             return Ok();
         }
         #endregion
+        #region Tournament
+        [Route("All")]
+        public ActionResult GetAll(TokenCheck tokenCheck)
+        {
+            return Ok(JsonConvert.SerializeObject(new Tournament(_roleContext, _configuration).GetAllTypes(tokenCheck)));
+        }
+        [Route("Type/Add")]
+        public ActionResult TournamentAdd(TournamentTypeAddRead type)
+        {
+            return Ok(new Tournament(_roleContext, _configuration).TournamentTypeAdd(type));
+        }
+        [Route("Type/Delete")]
+        public ActionResult TournamentDelete(TournamentTypeDelete delete)
+        {
+            return Ok(new Tournament(_roleContext, _configuration).TournamentTypeDelete(delete));
+        }
+        [Route("Type/Modify")]
+        public ActionResult TournamentModify(TournamentTypeModify modify)
+        {
+            return Ok(new Tournament(_roleContext, _configuration).TournamentTypeModify(modify));
+        }
+        [Route("Type/Read")]
+        public ActionResult TournamentRead()
+        {
+            return Ok();
+        }
+        #endregion
     }
 }
