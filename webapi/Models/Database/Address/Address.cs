@@ -11,6 +11,6 @@ namespace webapi.Models.Database.Address
         public string StreetName2 { get; set; } = string.Empty;
         public string AppNumber { get; set; } = string.Empty;
         public string Zipcode { get; set; } = string.Empty;
-        public long? IdCity { get; set; }
+        public long IdCity { get; set; }
     }
 }
