@@ -7,9 +7,9 @@
         public string streetName2 { get; set; }
         public string appartment { get; set; }
         public string zipcode { get; set; }
-        public long? city { get; set; }
+        public long city { get; set; }
 
-        public TransAddress(string door, string street, string street2, string appNumber, string zip, long? ville)
+        public TransAddress(string door, string street, string street2, string appNumber, string zip, long ville)
         {
             doorNumber = door;
             streetName = street;

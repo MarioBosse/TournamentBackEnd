@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using webapi.Models.Database.Tournaments;
+﻿using System.ComponentModel.DataAnnotations;
 using webapi.Models.Repository.Token;
 
 namespace webapi.Models.Repository.Users
@@ -11,14 +8,13 @@ namespace webapi.Models.Repository.Users
         public long IdUser { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        [Required]
         public string Email { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
         public DateTime? Birthdate { get; set; }
         public byte[]? ProfilePhoto { get; set; }
         public bool IsActivated { get; set; } = false;
         public long? IdAddress { get; set; } = 0;
-        public UserAddress userAddress { get; set; }
+        public UserAddress userAddress { get; set; } = new UserAddress();
     }
 
     public class UserRead
@@ -33,7 +29,7 @@ namespace webapi.Models.Repository.Users
         public byte[]? ProfilePhoto { get; set; }
         public bool IsActivated { get; set; } = false;
         public long? IdAddress { get; set; } = 0;
-        public UserAddress userAddress { get; set; }
+        public UserAddress userAddress { get; set; } = new UserAddress();
     }
     public class UserAddress
     {
@@ -78,7 +74,7 @@ namespace webapi.Models.Repository.Users
     }
     public class GetAll
     {
-        public List<UserRead>? Users { get; set; } = new List<ReadUser>();
+        public List<UserRead>? Users { get; set; } = new List<UserRead>();
         public TokenConnexion Validation { get; set; } = new TokenConnexion();
     }
     public class TournamentDelete
@@ -88,6 +84,15 @@ namespace webapi.Models.Repository.Users
     }
     public class ReadUser
     {
+        public long IdUser { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Gender { get; set; } = string.Empty;
+        public DateTime? Birthdate { get; set; }
+        public byte[]? ProfilePhoto { get; set; }
+        public bool IsActivated { get; set; } = false;
+        public long? IdAddress { get; set; } = 0;
     }
     public class UserDelete
     {
