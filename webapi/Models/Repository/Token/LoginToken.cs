@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using webapi.Models.Database.Users;
 
 namespace webapi.Models.Repository.Token
 {
@@ -11,7 +9,7 @@ namespace webapi.Models.Repository.Token
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 
-        public LoginToken(Users.User user)
+        public LoginToken(User user)
         {
             this.IdUser = user.IdUser;
             this.FirstName = user.FirstName;

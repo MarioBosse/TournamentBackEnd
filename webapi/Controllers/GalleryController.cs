@@ -7,13 +7,14 @@ namespace webapi.Controllers
     public class GalleryController : ControllerBase
     {
         private readonly UserRoleContext _roleContext;
+
         public GalleryController(UserRoleContext roleContext)
         {
             _roleContext = roleContext;
         }
 
-        [Route("Api/Gallery/GetTournaments")]
-        public ActionResult GetAllTournaments()
+        [Route("Api/Gallery/AllActive")]
+        public ActionResult GetAllActiveTournaments()
         {
             return Ok();
         }

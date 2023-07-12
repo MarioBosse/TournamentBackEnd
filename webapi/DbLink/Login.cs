@@ -1,10 +1,8 @@
 using AuthenticationService.Managers;
 using AuthenticationService.Models;
 using AuthenticationService.Token;
-using Org.BouncyCastle.Security;
 using System.Security.Claims;
 using webapi.Context;
-using webapi.Models.CRUD.Token;
 using webapi.Models.Repository;
 using webapi.Models.Repository.Login;
 using webapi.Models.Repository.Token;
@@ -20,29 +18,38 @@ namespace webapi.DbLink
             _roleContext = roleContext;
             _configuration = configuration;
         }
-
-        public List<AllUsers> GetAlls()
+        public GetAlls? GetAlls(TokenCheck token)
         {
-            if (_roleContext == null || _roleContext.Users == null || _roleContext.Addresses == null) return new List<AllUsers>();
-            var alls = _roleContext.Users.Where(e => e.IdUser > 0).ToList();
+            TokenConnexion tokenC = new ConnexionState(_roleContext, _configuration).GetConnexionState(token);
+            TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(token);
+            if (isValide == null || !isValide.IsValid) return (new GetAlls() {  Validation = tokenC });
 
-            List<AllUsers> allUsers = new List<AllUsers>();
-            foreach(var user in alls)
+            if (token == null || _roleContext == null || _roleContext.Users == null || _roleContext.Addresses == null) return new GetAlls() { Validation = tokenC };
+            if(isValide != null && isValide.IsValid)
             {
-                var ad = _roleContext.Addresses.Where(e => e.IdAddress == user.IdAddress).FirstOrDefault();
-                if (ad == null) continue;
+                var alls = _roleContext.Users.Where(e => e.IdUser > 0).ToList();
 
-                allUsers.Add(new AllUsers() { FirstName = user.FirstName,
-                                              LastName = user.LastName,
-                                              Email = user.Email,
-                                              Gender = user.Gender,
-                                              Birthdate = user.Birthdate,
-                                              IsActivated = user.IsActivated,
-                                              ProfilePhoto = user.ProfilePhoto,
-                                              Address = new DataObjectTransfert().GetAddress(ad, _roleContext)
-                });
+                List<AllUsers> allUsers = new List<AllUsers>();
+                foreach (var user in alls)
+                {
+                    var ad = _roleContext.Addresses.Where(e => e.IdAddress == user.IdAddress).FirstOrDefault();
+                    if (ad == null) continue;
+
+                    allUsers.Add(new AllUsers()
+                    {
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        Gender = user.Gender,
+                        Birthdate = user.Birthdate,
+                        IsActivated = user.IsActivated,
+                        ProfilePhoto = user.ProfilePhoto,
+                        Address = new DataObjectTransfert().GetAddress(ad, _roleContext)
+                    });
+                }
+                return new GetAlls() { Validation = tokenC, AllUsers = allUsers };
             }
-            return allUsers;
+            return null;
         }
         public VraiFaux EmailExisting(String email)
         {
@@ -53,11 +60,12 @@ namespace webapi.DbLink
             return VF;
         }
 
-        public TokenRead? GetConnection(LoginSend loginSend)
+        public TokenCheck? GetConnection(LoginSend loginSend)
         {
             if (_roleContext == null || _roleContext.Users == null) return null;
 
-            TokenRead TR = new TokenRead();
+            LoginUser LU = new LoginUser();
+            TokenCheck TR = new TokenCheck();
             TR.Email = loginSend.Email;
 
             var val = _roleContext.Users.Where(e => e.Email == loginSend.Email && e.Password == loginSend.Password).FirstOrDefault();
@@ -87,6 +95,10 @@ namespace webapi.DbLink
                 Claims = GetClaims(claims).ToArray<Claim>()
             });
             TR.Token = token;
+            LU.tokenChek = TR;
+            LU.Firstname = val.FirstName;
+            LU.Lastname = val.LastName;
+            LU.photoProfile = val.ProfilePhoto;
             return TR;
         }
 
@@ -94,7 +106,7 @@ namespace webapi.DbLink
         {
             return claims.AsEnumerable();
         }
-        public TokenValidation? IsConnexionValid(TokenRead tokenRead)
+        public TokenValidation? IsConnexionValid(TokenCheck tokenRead)
         {
             bool GotEmail = false;
             bool validEmail = false;
@@ -102,10 +114,12 @@ namespace webapi.DbLink
             bool GotKey = false;
             bool validKey = false;
 
-            if (_roleContext == null) return null;
-            if (_roleContext.Users == null) return null;
+            if (_roleContext == null || _roleContext.Users == null || tokenRead == null || tokenRead.Email == null) return null;
 
-            Models.Users.Token? secretKey = _roleContext.Tokens.Where(t => t.IdUser == (Int64)_roleContext.Users.Where(e => e.Email == tokenRead.Email).FirstOrDefault().IdUser).FirstOrDefault();
+            Models.Database.Users.User? id = _roleContext.Users.Where(e => e.Email == tokenRead.Email).FirstOrDefault();
+            if (id == null) return null;
+
+            Models.Database.Users.Token? secretKey = _roleContext.Tokens.Where(t => t.IdUser == id.IdUser).FirstOrDefault();
             if (secretKey == null) return null;
 
             if(new JWTService(secretKey.SecurityToken).IsTokenValid(tokenRead.Token))
