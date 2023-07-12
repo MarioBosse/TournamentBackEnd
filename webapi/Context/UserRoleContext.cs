@@ -407,6 +407,8 @@ namespace webapi.Context
                 {
                     // Identifie l'addresse ID pour la passer à USER
                     // Utiliser l'address ID pour sauvegarder les informations complémentaire de l'adresse (Appt, ...)
+                    Int64 IdAddr = new DbLink.Address(this).GetID(usersValue.DoorNumber, usersValue.StreetName);
+
                     User u = new User()
                     {
                         FirstName = usersValue.Firstname,
@@ -416,15 +418,17 @@ namespace webapi.Context
                         Gender = usersValue.Gender,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
+                        IdAddress = IdAddr,
                         IsActivated = true,
                         ProfilePhoto = new Utils().GetFileContent(usersValue.ProfilePicture)
                     };
-                    if (u != null)
-                    {
-                        Users.Add(u);
-                    }
-                };
-                SaveChanges();
+                    // Enregistrement de l'utilisateur
+                    new DbLink.Users(this).AddUser(u);
+
+                    // Enregistrement des informations complémentaires
+                    if(usersValue.Infos != null)
+                        new DbLink.Address(this).AddInfos(IdAddr, usersValue.Infos);
+                }
             }
             return GetUser(usersValue);
         }

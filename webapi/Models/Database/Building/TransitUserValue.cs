@@ -12,6 +12,7 @@ namespace webapi.Models.Database.Building
         public DateTime Birthdate { get; set; }
         public String DoorNumber { get; set; } = String.Empty;
         public String StreetName { get;set; } = String.Empty;
+        public String[]? Infos { get; set; }
         public String ProfilePicture { get; set; } = String.Empty;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

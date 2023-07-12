@@ -20,7 +20,7 @@ namespace webapi.Definitions
             this.Users.Clear();
             this.Users.AddRange( new List<TransitUserValue>()
             {
-                new TransitUserValue() { Firstname="Mario", Lastname="Bossé", Gender="M", Email="mario.bosse@cssc.gouv.qc.ca", Password="Smf1968/#123", ProfilePicture="C:\\Users\\31673\\OneDrive - CSS de la Capitale\\Images\\Pellicule\\Moi - 2021-09-01.jpg" }
+                new TransitUserValue() { Firstname="Mario", Lastname="Bossé", Gender="M", Email="mario.bosse@cssc.gouv.qc.ca", Password="Smf1968/#123", Birthdate=new DateTime(1968,03,08), DoorNumber="464", StreetName="Rte François Gignac", Infos = new string[] { "Terrain 826" }, ProfilePicture="C:\\Users\\31673\\OneDrive - CSS de la Capitale\\Images\\Pellicule\\Moi - 2021-09-01.jpg" }
             });
         }
 
