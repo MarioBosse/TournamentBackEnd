@@ -13,5 +13,7 @@ namespace webapi.Models.Database.Tournaments
         public long IdTeamLocal { get; set; }
         public short ScoreVisitor { get; set; }
         public short ScoreLocal { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdateddAt { get; set; } = DateTime.Now;
     }
 }

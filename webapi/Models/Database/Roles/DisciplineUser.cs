@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using webapi.Models.Database.Users;
 
 namespace webapi.Models.Database.Roles
 {

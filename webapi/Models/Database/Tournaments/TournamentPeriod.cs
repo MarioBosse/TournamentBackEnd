@@ -9,5 +9,7 @@ namespace webapi.Models.Database.Tournaments
         public long IdTournamentPeriod { get; set; }
         public long IdTournament { get; set; }
         public string Name { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdateddAt { get; set; } = DateTime.Now;
     }
 }
