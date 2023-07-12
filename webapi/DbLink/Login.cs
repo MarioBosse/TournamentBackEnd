@@ -95,7 +95,7 @@ namespace webapi.DbLink
                 Claims = GetClaims(claims).ToArray<Claim>()
             });
             TR.Token = token;
-            LU.tokenChek = TR;
+            LU.tokenCheck = TR;
             LU.Firstname = val.FirstName;
             LU.Lastname = val.LastName;
             LU.photoProfile = val.ProfilePhoto;
