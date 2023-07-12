@@ -9,8 +9,11 @@ namespace webapi.DbLink
 {
     public class Tournament
     {
-        private long type;
+<<<<<<< HEAD
+        //private long type;
 
+=======
+>>>>>>> User&Address
         private UserRoleContext _roleContext { get; set; }
         private IConfiguration _configuration { get; set; }
         #region Constructeur
@@ -105,7 +108,7 @@ namespace webapi.DbLink
         #endregion
         #endregion
         #region Tournament
-        public GetAll? GetAll(TokenCheck tokenCheck)
+        public GetAll? GetAllActive(TokenCheck tokenCheck)
         {
             TokenConnexion token = new ConnexionState(_roleContext, _configuration).GetConnexionState(tokenCheck);
             TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(tokenCheck);

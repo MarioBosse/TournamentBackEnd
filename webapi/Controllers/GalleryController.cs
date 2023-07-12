@@ -13,8 +13,8 @@ namespace webapi.Controllers
             _roleContext = roleContext;
         }
 
-        [Route("Api/Gallery/All")]
-        public ActionResult GetAllTournaments()
+        [Route("Api/Gallery/AllActive")]
+        public ActionResult GetAllActiveTournaments()
         {
             return Ok();
         }

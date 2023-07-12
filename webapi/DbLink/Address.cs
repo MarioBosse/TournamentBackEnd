@@ -1,4 +1,4 @@
-﻿namespace webapi.DbLink
+namespace webapi.DbLink
 {
     public class Address
     {

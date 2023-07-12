@@ -16,8 +16,7 @@ namespace webapi.Models.Database.Users
         public DateTime? Birthdate { get; set; }
         [Required]
         public string Password { get; set; } = string.Empty;
-        [Column(TypeName = "LongBlob")]
-        public byte[]? ProfilePhoto { get; set; }
+        public String ProfilePhoto { get; set; } = String.Empty;
         public bool IsActivated { get; set; } = false;
         public string? PasswordResetCode { get; set; } = string.Empty;
         public string? ActivationCode { get; set; } = string.Empty;

@@ -64,6 +64,7 @@ namespace webapi.DbLink
         {
             if (_roleContext == null || _roleContext.Users == null) return null;
 
+            LoginUser LU = new LoginUser();
             TokenCheck TR = new TokenCheck();
             TR.Email = loginSend.Email;
 
@@ -94,6 +95,10 @@ namespace webapi.DbLink
                 Claims = GetClaims(claims).ToArray<Claim>()
             });
             TR.Token = token;
+            LU.tokenChek = TR;
+            LU.Firstname = val.FirstName;
+            LU.Lastname = val.LastName;
+            LU.photoProfile = val.ProfilePhoto;
             return TR;
         }
 

@@ -9,6 +9,11 @@ namespace webapi.Models.Database.Building
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
+        public DateTime Birthdate { get; set; }
+        public String DoorNumber { get; set; } = String.Empty;
+        public String StreetName { get;set; } = String.Empty;
+        public String[]? Infos { get; set; }
+        public String ProfilePicture { get; set; } = String.Empty;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

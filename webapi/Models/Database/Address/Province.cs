@@ -8,5 +8,7 @@ namespace webapi.Models.Database.Address
         public long IdProvince { get; set; }
         public string Name { get; set; } = string.Empty;
         public long IdCountry { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdateddAt { get; set; } = DateTime.Now;
     }
 }
