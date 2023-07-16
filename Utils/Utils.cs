@@ -2,11 +2,14 @@
 {
     public class Utils
     {
-        public String GetFileContent(string filename)
+        public String BinaryFileToBase64(string filename)
         {
-            String content = Convert.ToBase64String(File.ReadAllBytes(filename));
-            return content;
+            return Convert.ToBase64String(File.ReadAllBytes(filename));
         }
+    }
 
+
+    public class Traitement
+    {
     }
 }

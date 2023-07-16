@@ -3,6 +3,6 @@
     public class TokenValidation
     {
         public bool IsValid { get; set; }
-        public TokenConnexion Validation { get; set; } = new TokenConnexion();
+        public TokenConnexion TokenConnexion { get; set; } = new TokenConnexion();
     }
 }
