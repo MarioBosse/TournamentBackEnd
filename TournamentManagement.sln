@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapi", "webapi\webapi.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationService", "AutenticationService\AuthenticationService.csproj", "{04F0CD2F-B109-4F29-96EB-78E2A2935CAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{A333B14E-8FC8-4346-83B5-BE673D87B43A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiDll", "Utils\GiDll.csproj", "{A333B14E-8FC8-4346-83B5-BE673D87B43A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

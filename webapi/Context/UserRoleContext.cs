@@ -420,7 +420,7 @@ namespace webapi.Context
                         UpdatedAt = DateTime.Now,
                         IdAddress = IdAddr,
                         IsActivated = true,
-                        ProfilePhoto = new Utils().GetFileContent(usersValue.ProfilePicture)
+                        ProfilePhoto = new Utils().BinaryFileToBase64(usersValue.ProfilePicture)
                     };
                     // Enregistrement de l'utilisateur
                     new DbLink.Users(this).AddUser(u);

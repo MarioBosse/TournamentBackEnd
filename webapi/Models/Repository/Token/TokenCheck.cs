@@ -12,5 +12,6 @@
         public String? photoProfile { get; set; } = null;
         public String Firstname { get; set; } = String.Empty;
         public String Lastname { get; set; } = String.Empty;
+        public TokenConnexion TokenConnexion { get; set; } = new TokenConnexion();
     }
 }

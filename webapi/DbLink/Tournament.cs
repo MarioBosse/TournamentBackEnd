@@ -9,11 +9,6 @@ namespace webapi.DbLink
 {
     public class Tournament
     {
-<<<<<<< HEAD
-        //private long type;
-
-=======
->>>>>>> User&Address
         private UserRoleContext _roleContext { get; set; }
         private IConfiguration _configuration { get; set; }
         #region Constructeur
