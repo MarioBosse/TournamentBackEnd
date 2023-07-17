@@ -22,9 +22,9 @@ namespace webapi.DbLink
         {
             TokenConnexion tokenC = new ConnexionState(_roleContext, _configuration).GetConnexionState(token);
             TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(token);
-            if (isValide == null || !isValide.IsValid) return (new GetAlls() {  Validation = tokenC });
+            if (isValide == null || !isValide.IsValid) return (new GetAlls() {  TokenConnexion = tokenC });
 
-            if (token == null || _roleContext == null || _roleContext.Users == null || _roleContext.Addresses == null) return new GetAlls() { Validation = tokenC };
+            if (token == null || _roleContext == null || _roleContext.Users == null || _roleContext.Addresses == null) return new GetAlls() { TokenConnexion = tokenC };
             if(isValide != null && isValide.IsValid)
             {
                 var alls = _roleContext.Users.Where(e => e.IdUser > 0).ToList();
@@ -47,7 +47,7 @@ namespace webapi.DbLink
                         Address = new DataObjectTransfert().GetAddress(ad, _roleContext)
                     });
                 }
-                return new GetAlls() { Validation = tokenC, AllUsers = allUsers };
+                return new GetAlls() { TokenConnexion = tokenC, AllUsers = allUsers };
             }
             return null;
         }
@@ -149,11 +149,11 @@ namespace webapi.DbLink
                     if(validEmail && validKey)
                     {
                         if(IsTimeValid(c))
-                            return (new TokenValidation() { IsValid = true, Validation = new Messages.ApiResponse().MessageConnexion(true, 101, "Connected") });
+                            return (new TokenValidation() { IsValid = true, TokenConnexion = new Messages.ApiResponse().MessageConnexion(true, 101, "Connected") });
                     }
                 }
             }
-            return new TokenValidation() { IsValid = false, Validation = new Messages.ApiResponse().MessageConnexion(false, 191, "Not connected or token expired") };
+            return new TokenValidation() { IsValid = false, TokenConnexion = new Messages.ApiResponse().MessageConnexion(false, 191, "Not connected or token expired") };
         }
 
         private bool IsTokenValid(Claim c, string token)

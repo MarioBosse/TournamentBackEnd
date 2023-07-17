@@ -23,7 +23,7 @@ internal class Program
         builder.Services.AddDbContextPool<UserRoleContext>(x =>
             x.UseMySql(builder.Configuration.GetConnectionString(connectionString),
                        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString(connectionString))));
-        builder.Services.AddSingleton(x => new UserRoleContext(connectionString));
+        builder.Services.AddSingleton(x => new UserRoleContext(connectionString, builder.Configuration));
 
         //builder.Services.AddSwaggerGen();
 

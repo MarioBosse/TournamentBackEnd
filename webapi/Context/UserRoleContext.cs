@@ -16,11 +16,14 @@ namespace webapi.Context
     {
         //private static readonly MySqlEFConfiguration? _configuration;
         private String _connectionString { get; set; } = String.Empty;
+        private IConfiguration _configuration { get; set; }
+
         private Boolean IsStarted { get; set; } = false;
 
-        public UserRoleContext(String connectionString)
+        public UserRoleContext(String connectionString, IConfiguration configuration)
         {
             _connectionString = connectionString;
+            _configuration = configuration;
             Database.EnsureCreated();
             InitContent();
         }
@@ -423,7 +426,7 @@ namespace webapi.Context
                         ProfilePhoto = new Utils().BinaryFileToBase64(usersValue.ProfilePicture)
                     };
                     // Enregistrement de l'utilisateur
-                    new DbLink.Users(this).AddUser(u);
+                    new DbLink.Users(this, _configuration).AddUser(u);
 
                     // Enregistrement des informations complémentaires
                     if(usersValue.Infos != null)
