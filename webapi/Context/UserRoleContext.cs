@@ -212,7 +212,7 @@ namespace webapi.Context
 
         private void InitContent()
         {
-            foreach(TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
+            foreach (TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
             {
                 AddLieu(addr.NamePlace, AddAddress(new TransAddress(addr.DoorNumber,
                                                                     addr.StreetName,
@@ -224,7 +224,12 @@ namespace webapi.Context
                                                                     AddCountry(addr.Pays))))));
             }
 
-            foreach(TransitUserValue tuv in  new DbBaseCreationLists().Users)
+            foreach (TransitRoles role in new DbBaseCreationLists().Roles)
+            {
+                AddRole(role);
+            }
+
+            foreach (TransitUserValue tuv in  new DbBaseCreationLists().Users)
             {
                 AddUser(tuv);
             }
@@ -417,6 +422,7 @@ namespace webapi.Context
                         FirstName = usersValue.Firstname,
                         LastName = usersValue.Lastname,
                         Email = usersValue.Email,
+                        Roles = usersValue.Roles,
                         Password = usersValue.Password,
                         Gender = usersValue.Gender,
                         CreatedAt = DateTime.Now,
@@ -434,6 +440,36 @@ namespace webapi.Context
                 }
             }
             return GetUser(usersValue);
+        }
+        #endregion
+        #region Role
+        private Int64 GetRole(TransitRoles trv)
+        {
+            if (Roles == null || Roles.Count() == 0) return 0;
+            var test = Roles.Where(e => e.Name == trv.Name ||
+                                        e.GuardName == trv.GuardName).FirstOrDefault();
+            if (test != null)
+                return test.IdRole;
+            return 0;
+        }
+
+        private Int64 AddRole(TransitRoles roleValue)
+        {
+            if(roleValue == null) return 0;
+            var a = GetRole(roleValue);
+            if(a == 0)
+            {
+                Role role = new Role()
+                {
+                    Name = roleValue.Name,
+                    GuardName = roleValue.GuardName,
+                    Mask = roleValue.Mask,
+                    CreatedAt = roleValue.CreatedAt,
+                    UpdateddAt = roleValue.UpdatedAt
+                };
+                new DbLink.Roles(this, _configuration).AddRoles(role);
+            }
+            return GetRole(roleValue); 
         }
         #endregion
     }

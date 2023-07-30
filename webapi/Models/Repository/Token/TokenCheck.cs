@@ -1,4 +1,6 @@
-﻿namespace webapi.Models.Repository.Token
+﻿using webapi.Models.Repository.Roles;
+
+namespace webapi.Models.Repository.Token
 {
     public class TokenCheck
     {
@@ -12,6 +14,7 @@
         public String? photoProfile { get; set; } = null;
         public String Firstname { get; set; } = String.Empty;
         public String Lastname { get; set; } = String.Empty;
+        public RolesBase RolesBase { get; set; } = new RolesBase();
         public TokenConnexion TokenConnexion { get; set; } = new TokenConnexion();
     }
 }

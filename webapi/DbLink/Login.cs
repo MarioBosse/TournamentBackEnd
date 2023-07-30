@@ -101,6 +101,7 @@ namespace webapi.DbLink
             TR.Token = token;
             LU.Firstname = val.FirstName;
             LU.Lastname = val.LastName;
+            LU.RolesBase = new DbLink.Roles(_roleContext, _configuration).GetInfos(TR);
             LU.photoProfile = val.ProfilePhoto;
             LU.TokenConnexion = new Messages.ApiResponse().MessageConnexion(true, 101, "Connected");
             return LU;
