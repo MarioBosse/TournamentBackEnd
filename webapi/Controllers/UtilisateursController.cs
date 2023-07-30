@@ -18,16 +18,52 @@ namespace webapi.Controllers
         }
 
         [Route("Address/Check")]
+        public ActionResult CheckAddress(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
         [Route("Address/Add")]
+        public ActionResult AddAddress(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
         [Route("Address/Modify")]
+        public ActionResult ModfyAddress(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
         [Route("Address/Delete")]
+        public ActionResult DeleteAddress(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
         [Route("Address/Get")]
-        [Route("User/")]
-        [Route("User/")]
-        [Route("User/")]
-        [Route("User/")]
-        [Route("User/")]
-        public ActionResult UserXX(TokenCheck tokenCheck)
+        public ActionResult GetAddress(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
+        [Route("User/Check")]
+        public ActionResult CheckUser(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
+        [Route("User/Add")]
+        public ActionResult AddUser(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
+        [Route("User/Modify")]
+        public ActionResult ModifyUser(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
+        [Route("User/Delete")]
+        public ActionResult DeleteUser(TokenCheck tokenCheck)
+        {
+            return Ok();
+        }
+        [Route("User/Get")]
+        public ActionResult GetUser(TokenCheck tokenCheck)
         {
             return Ok();
         }

@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutenticationService\AuthenticationService.csproj" />
+    <ProjectReference Include="..\Utils\GiDll.csproj" />
   </ItemGroup>
 
 </Project>

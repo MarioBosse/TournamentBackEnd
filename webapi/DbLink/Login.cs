@@ -22,9 +22,9 @@ namespace webapi.DbLink
         {
             TokenConnexion tokenC = new ConnexionState(_roleContext, _configuration).GetConnexionState(token);
             TokenValidation? isValide = new Login(_roleContext, _configuration).IsConnexionValid(token);
-            if (isValide == null || !isValide.IsValid) return (new GetAlls() {  Validation = tokenC });
+            if (isValide == null || !isValide.IsValid) return (new GetAlls() {  TokenConnexion = tokenC });
 
-            if (token == null || _roleContext == null || _roleContext.Users == null || _roleContext.Addresses == null) return new GetAlls() { Validation = tokenC };
+            if (token == null || _roleContext == null || _roleContext.Users == null || _roleContext.Addresses == null) return new GetAlls() { TokenConnexion = tokenC };
             if(isValide != null && isValide.IsValid)
             {
                 var alls = _roleContext.Users.Where(e => e.IdUser > 0).ToList();
@@ -47,7 +47,7 @@ namespace webapi.DbLink
                         Address = new DataObjectTransfert().GetAddress(ad, _roleContext)
                     });
                 }
-                return new GetAlls() { Validation = tokenC, AllUsers = allUsers };
+                return new GetAlls() { TokenConnexion = tokenC, AllUsers = allUsers };
             }
             return null;
         }
@@ -60,16 +60,21 @@ namespace webapi.DbLink
             return VF;
         }
 
-        public TokenCheck? GetConnection(LoginSend loginSend)
+        public LoginUser? GetConnection(LoginSend loginSend)
         {
             if (_roleContext == null || _roleContext.Users == null) return null;
 
+            LoginUser LU = new LoginUser();
             TokenCheck TR = new TokenCheck();
             TR.Email = loginSend.Email;
+            LU.tokenCheck = TR;
 
             var val = _roleContext.Users.Where(e => e.Email == loginSend.Email && e.Password == loginSend.Password).FirstOrDefault();
-            if (val == null) return null;
-
+            if (val == null)
+            {
+                LU.TokenConnexion = new Messages.ApiResponse().MessageConnexion(false, 191, "No connexion! Check Email & Password and retry.");
+                return LU;
+            }
             var secTok = _roleContext.Tokens.Where(e => e.IdUser == val.IdUser).FirstOrDefault();
 
             // Création d'un Jeton de sécurité. Il sera utilisé pour générer les jetons utilisé par l'utilisateur.
@@ -94,7 +99,12 @@ namespace webapi.DbLink
                 Claims = GetClaims(claims).ToArray<Claim>()
             });
             TR.Token = token;
-            return TR;
+            LU.Firstname = val.FirstName;
+            LU.Lastname = val.LastName;
+            LU.RolesBase = new DbLink.Roles(_roleContext, _configuration).GetInfos(TR);
+            LU.photoProfile = val.ProfilePhoto;
+            LU.TokenConnexion = new Messages.ApiResponse().MessageConnexion(true, 101, "Connected");
+            return LU;
         }
 
         private IEnumerable<Claim> GetClaims(List<Claim> claims)
@@ -140,11 +150,11 @@ namespace webapi.DbLink
                     if(validEmail && validKey)
                     {
                         if(IsTimeValid(c))
-                            return (new TokenValidation() { IsValid = true });
+                            return (new TokenValidation() { IsValid = true, TokenConnexion = new Messages.ApiResponse().MessageConnexion(true, 101, "Connected") });
                     }
                 }
             }
-            return null;
+            return new TokenValidation() { IsValid = false, TokenConnexion = new Messages.ApiResponse().MessageConnexion(false, 191, "Not connected or token expired") };
         }
 
         private bool IsTokenValid(Claim c, string token)

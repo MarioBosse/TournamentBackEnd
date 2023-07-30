@@ -8,5 +8,7 @@ namespace webapi.Models.Database.Camping
         public long IdTerrain { get; set; }
         public string Name { get; set; } = string.Empty;
         public long IdAddress { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdateddAt { get; set; } = DateTime.Now;
     }
 }

@@ -1,10 +1,5 @@
-﻿using System.Data.Common;
-using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
-using MySql.EntityFrameworkCore.Extensions;
-
-
-
+﻿using Microsoft.EntityFrameworkCore;
+using GiDlls;
 
 using webapi.Definitions;
 using webapi.Models.Database.Address;
@@ -20,18 +15,17 @@ namespace webapi.Context
     public class UserRoleContext : DbContext
     {
         //private static readonly MySqlEFConfiguration? _configuration;
-        private String _connectionString = "Server=localhost; User ID=root; Password=root; Database=TournamentMgr";
-        public Boolean IsStarted { get; set; } = false;
-        public UserRoleContext(String connectionString)
+        private String _connectionString { get; set; } = String.Empty;
+        private IConfiguration _configuration { get; set; }
+
+        private Boolean IsStarted { get; set; } = false;
+
+        public UserRoleContext(String connectionString, IConfiguration configuration)
         {
             _connectionString = connectionString;
+            _configuration = configuration;
             Database.EnsureCreated();
-
-
-            Database.OpenConnection();
             InitContent();
-            Database.CloseConnection();
-
         }
         public UserRoleContext(DbContextOptions<UserRoleContext> option) : base(option)
         {
@@ -44,6 +38,7 @@ namespace webapi.Context
         public DbSet<Province>? Provinces { get; private set; }
         public DbSet<City>? Cities { get; private set; }
         public DbSet<Address>? Addresses { get; private set; }
+        public DbSet<Appartement> Appartements { get; private set; }
         #endregion
 
         #region DbSet Roles
@@ -64,6 +59,7 @@ namespace webapi.Context
         public DbSet<Roster>? Rosters { get; private set; }
         public DbSet<Team>? Teams { get; private set; }
         public DbSet<Tournament>? Tournaments { get; private set; }
+        public DbSet<TournamentValidity> tournamentValidities { get; private set; }
         public DbSet<TournamentPeriod>? TournamentPeriods { get; private set; }
         public DbSet<TournamentPhaese>? TournamentPhaeses { get; private set; }
         public DbSet<TournamentType>? TournamentTypes { get; private set; }
@@ -112,6 +108,11 @@ namespace webapi.Context
             modelBuilder.Entity<Address>(entity =>
             {
                 entity.HasKey(e => e.IdAddress);
+            });
+
+            modelBuilder.Entity<Appartement>(entity =>
+            {
+                entity.HasKey(e => e.IdAppartmet);
             });
             #endregion
             #region Roles
@@ -175,6 +176,10 @@ namespace webapi.Context
             modelBuilder.Entity<TournamentType>(entity => {
                 entity.HasKey(e => e.IdTournamentType);
             });
+
+            modelBuilder.Entity<TournamentValidity>(entity => {
+                entity.HasKey(e => e.IdTournamentValidity);
+            });
             #endregion
             #region Users
             modelBuilder.Entity<Permission>(entity => {
@@ -207,7 +212,7 @@ namespace webapi.Context
 
         private void InitContent()
         {
-            foreach(TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
+            foreach (TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
             {
                 AddLieu(addr.NamePlace, AddAddress(new TransAddress(addr.DoorNumber,
                                                                     addr.StreetName,
@@ -219,7 +224,12 @@ namespace webapi.Context
                                                                     AddCountry(addr.Pays))))));
             }
 
-            foreach(TransitUserValue tuv in  new DbBaseCreationLists().Users)
+            foreach (TransitRoles role in new DbBaseCreationLists().Roles)
+            {
+                AddRole(role);
+            }
+
+            foreach (TransitUserValue tuv in  new DbBaseCreationLists().Users)
             {
                 AddUser(tuv);
             }
@@ -244,7 +254,7 @@ namespace webapi.Context
             var p = GetCountry(Name);
             if (p == 0)
             {
-                Countries.Add(new Country { Name = Name });
+                Countries.Add(new Country { Name = Name, CreatedAt = DateTime.Now, UpdateddAt = DateTime.Now });
                 SaveChanges();
             }
             return GetCountry(Name);
@@ -267,7 +277,7 @@ namespace webapi.Context
             var p = GetProvince(Name, pays);
             if (p == 0)
             {
-                if(Provinces != null) Provinces.Add(new Province { Name = Name, IdCountry = pays });
+                if(Provinces != null) Provinces.Add(new Province { Name = Name, IdCountry = pays, CreatedAt = DateTime.Now, UpdateddAt = DateTime.Now });
                 SaveChanges();
             }
             return GetProvince(Name, pays);
@@ -290,7 +300,7 @@ namespace webapi.Context
             var v = GetVille(Name, province);
             if (v == 0)
             {
-                if(Cities != null) Cities.Add(new City { Name = Name, IdProvince = province });
+                if(Cities != null) Cities.Add(new City { Name = Name, IdProvince = province, CreatedAt = DateTime.Now, UpdateddAt = DateTime.Now });
                 SaveChanges();
             }
             return GetVille(Name, province);
@@ -324,7 +334,9 @@ namespace webapi.Context
                                                                     StreetName2 = ta.streetName2,
                                                                     AppNumber = ta.appartment,
                                                                     Zipcode=ta.zipcode,
-                                                                    IdCity = ta.city});
+                                                                    IdCity = ta.city,
+                                                                    CreatedAt = DateTime.Now,
+                                                                    UpdateddAt = DateTime.Now});
                 SaveChanges();
             }
             return GetAddress(ta);
@@ -347,7 +359,9 @@ namespace webapi.Context
             {
                 if (TournamentTypes != null) TournamentTypes.Add(new TournamentType()
                 {
-                    Name = tt.Name
+                    Name = tt.Name,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
                 });
                 SaveChanges();
             }
@@ -368,7 +382,10 @@ namespace webapi.Context
             var l = GetLieu(Name, Address);
             if(l == 0)
             {
-                Terrains.Add(new Terrain() { Name = Name, IdAddress = Address });
+                Terrains.Add(new Terrain() { Name = Name,
+                                             IdAddress = Address,
+                                             CreatedAt = DateTime.Now,
+                                             UpdateddAt = DateTime.Now });
                 SaveChanges();
             }
             return GetLieu(Name, Address);
@@ -392,22 +409,67 @@ namespace webapi.Context
         {
             if (usersValue == null) return 0;
             var a = GetUser(usersValue);
-            if (a == 0)
+            if (Users != null)
             {
-                if (Users != null) Users.Add(new User()
+                if (a == 0)
                 {
-                    FirstName = usersValue.Firstname,
-                    LastName = usersValue.Lastname,
-                    Email = usersValue.Email,
-                    Password = usersValue.Password,
-                    Gender = usersValue.Gender,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                    IsActivated = true
-                });
-                SaveChanges();
+                    // Identifie l'addresse ID pour la passer à USER
+                    // Utiliser l'address ID pour sauvegarder les informations complémentaire de l'adresse (Appt, ...)
+                    Int64 IdAddr = new DbLink.Address(this).GetID(usersValue.DoorNumber, usersValue.StreetName);
+
+                    User u = new User()
+                    {
+                        FirstName = usersValue.Firstname,
+                        LastName = usersValue.Lastname,
+                        Email = usersValue.Email,
+                        Roles = usersValue.Roles,
+                        Password = usersValue.Password,
+                        Gender = usersValue.Gender,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        IdAddress = IdAddr,
+                        IsActivated = true,
+                        ProfilePhoto = new Utils().BinaryFileToBase64(usersValue.ProfilePicture)
+                    };
+                    // Enregistrement de l'utilisateur
+                    new DbLink.Users(this, _configuration).AddUser(u);
+
+                    // Enregistrement des informations complémentaires
+                    if(usersValue.Infos != null)
+                        new DbLink.Address(this).AddInfos(IdAddr, usersValue.Infos);
+                }
             }
             return GetUser(usersValue);
+        }
+        #endregion
+        #region Role
+        private Int64 GetRole(TransitRoles trv)
+        {
+            if (Roles == null || Roles.Count() == 0) return 0;
+            var test = Roles.Where(e => e.Name == trv.Name ||
+                                        e.GuardName == trv.GuardName).FirstOrDefault();
+            if (test != null)
+                return test.IdRole;
+            return 0;
+        }
+
+        private Int64 AddRole(TransitRoles roleValue)
+        {
+            if(roleValue == null) return 0;
+            var a = GetRole(roleValue);
+            if(a == 0)
+            {
+                Role role = new Role()
+                {
+                    Name = roleValue.Name,
+                    GuardName = roleValue.GuardName,
+                    Mask = roleValue.Mask,
+                    CreatedAt = roleValue.CreatedAt,
+                    UpdateddAt = roleValue.UpdatedAt
+                };
+                new DbLink.Roles(this, _configuration).AddRoles(role);
+            }
+            return GetRole(roleValue); 
         }
         #endregion
     }

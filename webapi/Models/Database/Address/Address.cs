@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Address
 {
@@ -12,5 +12,7 @@ namespace webapi.Models.Database.Address
         public string AppNumber { get; set; } = string.Empty;
         public string Zipcode { get; set; } = string.Empty;
         public long? IdCity { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdateddAt { get; set; } = DateTime.Now;
     }
 }
