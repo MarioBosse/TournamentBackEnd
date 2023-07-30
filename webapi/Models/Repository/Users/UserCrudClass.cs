@@ -3,6 +3,12 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.Models.Repository.Users
 {
+    public class GetInfos
+    {
+        public String Email { get; set; } = String.Empty;
+        public String Token { get; set; } = String.Empty;
+    }
+
     public class UserBase
     {
         public long IdUser { get; set; }
@@ -11,10 +17,12 @@ namespace webapi.Models.Repository.Users
         public string Email { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
         public DateTime? Birthdate { get; set; }
-        public byte[]? ProfilePhoto { get; set; }
+        public String ProfilePhoto { get; set; } = String.Empty;
         public bool IsActivated { get; set; } = false;
         public long? IdAddress { get; set; } = 0;
         public UserAddress userAddress { get; set; } = new UserAddress();
+
+        public TokenConnexion TokenConnexion { get; set; }
     }
 
     public class UserRead
@@ -26,9 +34,9 @@ namespace webapi.Models.Repository.Users
         public string Email { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
         public DateTime? Birthdate { get; set; }
-        public byte[]? ProfilePhoto { get; set; }
+        public String ProfilePhoto { get; set; } = String.Empty;
         public bool IsActivated { get; set; } = false;
-        public long? IdAddress { get; set; } = 0;
+        public long IdAddress { get; set; } = 0;
         public UserAddress userAddress { get; set; } = new UserAddress();
     }
     public class UserAddress
@@ -39,6 +47,9 @@ namespace webapi.Models.Repository.Users
         public string StreetName2 { get; set; } = string.Empty;
         public string AppNumber { get; set; } = string.Empty;
         public string Zipcode { get; set; } = string.Empty;
+
+        public List<String> lComplement = new List<String>();
+        public String[] Complement { get; set; }
         public UserCity City { get; set; } = new UserCity();
         public UserProvince Province { get; set; } = new UserProvince();
         public UserPays Pays { get; set; } = new UserPays();

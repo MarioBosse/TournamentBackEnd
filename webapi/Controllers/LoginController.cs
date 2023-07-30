@@ -21,7 +21,6 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.Controllers
 {
-
     [ApiController]
     [Route("Api/Login/")]
     public class LoginController : ControllerBase
