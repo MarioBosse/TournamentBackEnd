@@ -1,5 +1,30 @@
-﻿using webapi.Models.Database.Building;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Definitions
+// Description : 
+//
+//----------------------------------------------------------------------------------
+using webapi.Models.Database.Building;
 
+//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Définition de Class
+// Nom : Definitions
+// Héritage : Aucun
+//
+//----------------------------------------------------------------------------------
 namespace webapi.Definitions
 {
     public class DbBaseCreationLists
@@ -7,14 +32,52 @@ namespace webapi.Definitions
         public List<TransitAdresseValue> Addresss { get; private set; } = new List<TransitAdresseValue>();
         public List<TransitUserValue> Users { get; private set; } = new List<TransitUserValue>();
         public List<TransitTournementType> TournamentType { get; private set; } = new List<TransitTournementType>();
+        public List<TransitRoles> Roles { get; private set; } = new List<TransitRoles>();
 
+        //----------------------------------------------------------------------------------
+        //
+        // Gestion Informatique Mario Bossé (GiMB)
+        // @2023 Tout droit réservé. Reproducion interdite
+        //
+        // Concepteur : Mario Bossé
+        // 16 Juillet 2023
+        //
+        // Niveau d'accès : Public
+        // Base d'enregistrement : Aucun
+        // Type de retour : Constructeur
+        // Nom : DbBaseCreationList
+        // Description : Classe responsable de la cération des données de base de la base de
+        //               donnée. Toutes les données par défaut devant être entreposé dans la
+        //               base de données le sont par le biais de cette classe et des ses
+        //               fonctions.
+        // Paramètres : Aucun
+        // 
+        //----------------------------------------------------------------------------------
         public DbBaseCreationLists()
         {
             InitAddress();
+            InitRoles();
             InitUsers();
             InitTournamentType();
         }
 
+        //----------------------------------------------------------------------------------
+        //
+        // Gestion Informatique Mario Bossé (GiMB)
+        // @2023 Tout droit réservé. Reproducion interdite
+        //
+        // Concepteur : Mario Bossé
+        // 16 Juillet 2023
+        //
+        // Niveau d'accès : Private
+        // Base d'enregistrement : Aucun
+        // Type de retour : Aucun
+        // Nom : InitUsers
+        // Description : Ajout des usager par défaut responsable de la gestion des données
+        //               du projet.
+        // Paramètres : Aucun
+        // 
+        //----------------------------------------------------------------------------------
         private void InitUsers()
         {
             this.Users.Clear();
@@ -24,12 +87,30 @@ namespace webapi.Definitions
             });
         }
 
+        //----------------------------------------------------------------------------------
+        //
+        // Gestion Informatique Mario Bossé (GiMB)
+        // @2023 Tout droit réservé. Reproducion interdite
+        //
+        // Concepteur : Mario Bossé
+        // 16 Juillet 2023
+        //
+        // Niveau d'accès : Private
+        // Base d'enregistrement : Aucun
+        // Type de retour : Aucun
+        // Nom : InitTournamentType
+        // Description : Ajout des déférents type de tournoi supporté par défaut dans
+        //               l'application. D'autre peuvent être ajoutés via les différents
+        //               interface offert.
+        // Paramètres : Aucune
+        // 
+        //----------------------------------------------------------------------------------
         private void InitTournamentType()
         {
             TournamentType.Clear();
             TournamentType.AddRange(new List<TransitTournementType>()
             {
-                new TransitTournementType() { Name = "Pétancle" },
+                new TransitTournementType() { Name = "Pétancle", },
                 new TransitTournementType() { Name = "Fer" },
                 new TransitTournementType() { Name = "Whist militaire" },
                 new TransitTournementType() { Name = "Cribe" },
@@ -40,6 +121,60 @@ namespace webapi.Definitions
             });
         }
 
+        //----------------------------------------------------------------------------------
+        //
+        // Gestion Informatique Mario Bossé (GiMB)
+        // @2023 Tout droit réservé. Reproducion interdite
+        //
+        // Concepteur : Mario Bossé
+        // 16 Juillet 2023
+        //
+        // Niveau d'accès : Private
+        // Base d'enregistrement : Aucun
+        // Type de retour : Aucun
+        // Nom : InitRoles
+        // Description : Ajoute les définitions de Roles qui sont disponible pour
+        //               l'utilisation de l'application de gestion de tournoi.
+        // Paramètres : Aucun
+        // 
+        //----------------------------------------------------------------------------------
+        private void InitRoles()
+        {
+            this.Roles.Clear();
+            this.Roles.AddRange(new List<TransitRoles>()
+            {
+                new TransitRoles() { Name = "Administrateur",           GuardName = "Admin",                Mask =   1 },
+                new TransitRoles() { Name = "Superviseur",              GuardName = "Supervisor",           Mask =   2 },
+                new TransitRoles() { Name = "Proprietaire",             GuardName = "Owner",                Mask =   4 },
+                new TransitRoles() { Name = "TournoiAdministrateur",    GuardName = "TournamentAdmin",      Mask =   8 },
+                new TransitRoles() { Name = "CoPropietaire",            GuardName = "CoOwner",              Mask =  16 },
+                new TransitRoles() { Name = "TournoiSuperviseur",       GuardName = "TournamentSupervisor", Mask =  32 },
+                new TransitRoles() { Name = "Participant",              GuardName = "Player",               Mask =  64 },
+                new TransitRoles() { Name = "Developeur",               GuardName = "Devloper",             Mask = 128 },
+                new TransitRoles() { Name = "Juge",                     GuardName = "Judge",                Mask = 256 },
+                new TransitRoles() { Name = "Marqueur",                 GuardName = "Marquee",              Mask = 512 }
+            });
+        }
+
+        //----------------------------------------------------------------------------------
+        //
+        // Gestion Informatique Mario Bossé (GiMB)
+        // @2023 Tout droit réservé. Reproducion interdite
+        //
+        // Concepteur : Mario Bossé
+        // 16 Juillet 2023
+        //
+        // Niveau d'accès : Private
+        // Base d'enregistrement : Aucun
+        // Type de retour : Aucun
+        // Nom : InitAddress
+        // Description : Ajoute les addresses par défaut qui sont enregistré dans la base
+        //               de données. Dans le cadre de ce projet, les adresses inscrit sont
+        //               celles des terrains de camping gèré par l'entreprise Parkbridge
+        //               Canada.
+        // Paramètres : Aucun
+        // 
+        //----------------------------------------------------------------------------------
         private void InitAddress()
         {
             this.Addresss.Clear();

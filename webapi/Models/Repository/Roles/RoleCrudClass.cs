@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using webapi.Models.Repository.Roles;
 using webapi.Models.Repository.Token;
 
-namespace webapi.Models.Repository.Users
+namespace webapi.Models.Repository.Roles
 {
     public class GetInfos
     {
@@ -10,19 +9,16 @@ namespace webapi.Models.Repository.Users
         public String Token { get; set; } = String.Empty;
     }
 
-    public class UserBase
+    public class RoleBase
     {
         public long IdUser { get; set; }
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public List<RoleBase> Roles = new List<RoleBase>();
-        public string Email { get; set; } = string.Empty;
-        public string Gender { get; set; } = string.Empty;
-        public DateTime? Birthdate { get; set; }
-        public String ProfilePhoto { get; set; } = String.Empty;
-        public bool IsActivated { get; set; } = false;
-        public long? IdAddress { get; set; } = 0;
-        public UserAddress? userAddress { get; set; } = new UserAddress();
+        public string Name { get; set; } = string.Empty;
+        public string GuardName { get; set; } = string.Empty;
+    }
+
+    public class RolesBase
+    {
+        public List<RoleBase> Roles { get; set; } = new List<RoleBase>();
 
         public TokenConnexion TokenConnexion { get; set; }
     }
@@ -51,7 +47,7 @@ namespace webapi.Models.Repository.Users
         public string Zipcode { get; set; } = string.Empty;
 
         public List<String> lComplement = new List<String>();
-        public String[] Complement { get; set; }
+        public String[]? Complement { get; set; }
         public UserCity City { get; set; } = new UserCity();
         public UserProvince Province { get; set; } = new UserProvince();
         public UserPays Pays { get; set; } = new UserPays();
@@ -82,7 +78,6 @@ namespace webapi.Models.Repository.Users
     }
     public class Definition
     {
-        public ReadUser Tournament { get; set; } = new ReadUser();
         public TokenCheck Validation { get; set; } = new TokenCheck();
     }
     public class GetAll
@@ -90,29 +85,19 @@ namespace webapi.Models.Repository.Users
         public List<UserRead>? Users { get; set; } = new List<UserRead>();
         public TokenConnexion Validation { get; set; } = new TokenConnexion();
     }
-    public class TournamentDelete
-    {
-        public TokenCheck tokenCheck { get; set; } = new TokenCheck();
-        public UserBase user { get; set; } = new UserBase();
-    }
-    public class ReadUser
+    public class ReadRole
     {
         public long IdUser { get; set; }
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Gender { get; set; } = string.Empty;
-        public DateTime? Birthdate { get; set; }
-        public byte[]? ProfilePhoto { get; set; }
-        public bool IsActivated { get; set; } = false;
-        public long? IdAddress { get; set; } = 0;
+        public string Name { get; set; } = string.Empty;
+        public string Guard { get; set; } = string.Empty;
+        public uint Mask { get; set; } = 0;
     }
     public class UserDelete
     {
     }
-    public class UserModify
+    public class RoleModify
     {
         public TokenCheck tokenCheck { get; set; } = new TokenCheck();
-        public UserBase Origin { get; set; } = new UserBase();
+        public RoleBase Origin { get; set; } = new RoleBase();
     }
 }

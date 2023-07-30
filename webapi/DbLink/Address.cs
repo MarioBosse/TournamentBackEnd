@@ -42,9 +42,14 @@ namespace webapi.DbLink
 
             Models.Database.Address.Address? adr = _roleContext.Addresses.Where(e => e.IdAddress == id).FirstOrDefault();
             List<Appartement> app = _roleContext.Appartements.Where(a => a.IdAddress == id).ToList();
+
+            if (adr == null) return null;
             City? city = _roleContext.Cities.Where(c => c.IdCity == adr.IdCity).FirstOrDefault();
+            if (city == null) return null;
             Province? prov = _roleContext.Provinces.Where(p => p.IdProvince == city.IdProvince).FirstOrDefault();
+            if (prov == null) return null;
             Country? pays = _roleContext.Countries.Where(py => py.IdCountry == prov.IdCountry).FirstOrDefault();
+            if (pays == null) return null;
 
             return BuildUserBase(new Object[] { adr, app, city, prov, pays });
         }
