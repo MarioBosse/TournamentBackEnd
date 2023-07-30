@@ -422,6 +422,7 @@ namespace webapi.Context
                         FirstName = usersValue.Firstname,
                         LastName = usersValue.Lastname,
                         Email = usersValue.Email,
+                        Roles = usersValue.Roles,
                         Password = usersValue.Password,
                         Gender = usersValue.Gender,
                         CreatedAt = DateTime.Now,
@@ -458,7 +459,15 @@ namespace webapi.Context
             var a = GetRole(roleValue);
             if(a == 0)
             {
-                var roleId = new DbLink.Roles(this, _configuration).GetId(roleValue.Name, roleValue.GuardName);
+                Role role = new Role()
+                {
+                    Name = roleValue.Name,
+                    GuardName = roleValue.GuardName,
+                    Mask = roleValue.Mask,
+                    CreatedAt = roleValue.CreatedAt,
+                    UpdateddAt = roleValue.UpdatedAt
+                };
+                new DbLink.Roles(this, _configuration).AddRoles(role);
             }
             return GetRole(roleValue); 
         }

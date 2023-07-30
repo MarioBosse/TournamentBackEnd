@@ -145,7 +145,7 @@ namespace webapi.DbLink
                     roles -= max;
                 }
                 max /= 2;
-            } while (max > 0);
+            } while (max >= 1);
             return ret;
         }
 
