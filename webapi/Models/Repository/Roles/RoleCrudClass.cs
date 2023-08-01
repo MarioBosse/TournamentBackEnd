@@ -1,4 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Repository.Roles
+// Description : Classe qui régis les valeurs à manipuler soit par l'application,
+//               soit par le service, afin d'effectuer toutes les oppérations en
+//               lien avec les rôles de l'utilisateur.
+//
+//----------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 using webapi.Models.Repository.Token;
 
 namespace webapi.Models.Repository.Roles

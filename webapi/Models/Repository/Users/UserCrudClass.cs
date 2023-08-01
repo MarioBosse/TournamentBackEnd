@@ -1,4 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Repository.Users
+// Description : Classes qui régissent les besoins pour l'utilisation de la table
+//               Users.
+//
+//----------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
 using webapi.Models.Repository.Roles;
 using webapi.Models.Repository.Token;
 

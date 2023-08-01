@@ -1,4 +1,18 @@
-﻿namespace webapi.Models.Repository.Login
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Repository.Login
+// Description : Classe qui régis les valeurs de retour pour un utilisateur.
+//               Cette classe ne contient aucun élément pouvant être définie comme
+//               senssible.
+//
+//----------------------------------------------------------------------------------
+namespace webapi.Models.Repository.Login
 {
     public class AllUsers
     {

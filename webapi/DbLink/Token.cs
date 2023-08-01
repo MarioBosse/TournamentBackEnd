@@ -1,4 +1,18 @@
-﻿using webapi.Context;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.DbLink
+// Description : Cette classe effectue le lien entre les controleurs et les différents
+//               DbContext lié au Jeton et aux accèss des services de l'application
+//               de gestion de la base de données.
+//
+//----------------------------------------------------------------------------------
+using webapi.Context;
 using webapi.Models.Database.Users;
 
 namespace webapi.DbLink

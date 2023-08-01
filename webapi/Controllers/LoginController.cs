@@ -6,11 +6,10 @@
 // Concepteur : Mario Bossé
 // 16 Juillet 2023
 //
+// Nom : webapi.Controllers
 // API Controleur : Login
-// Description : Ce controleur offre les fonction pour :
-//      - vérifier,
-//      - indentifier,
-//      - et créer une connexion stable et sécuritaire.
+// Description : Classe controleur qui expose des fontions qui seront appelé par
+//               l'application Web.
 //
 //----------------------------------------------------------------------------------
 using Microsoft.AspNetCore.Mvc;

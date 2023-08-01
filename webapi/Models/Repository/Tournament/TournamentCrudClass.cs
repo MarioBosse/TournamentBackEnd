@@ -1,4 +1,17 @@
-﻿using webapi.Models.Database.Tournaments;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Repository.Tournament
+// Description : Classes qui régissent les besoins pour l'utilisation de la table
+//               Tournament.
+//
+//----------------------------------------------------------------------------------
+using webapi.Models.Database.Tournaments;
 using webapi.Models.Repository.Token;
 
 namespace webapi.Models.Repository.Tournament

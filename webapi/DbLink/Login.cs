@@ -1,3 +1,20 @@
+//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.DbLink
+// Description : Cette classe effectue le lien entre les controleurs et les différents
+//               DbContext lié à l'interprétation et a l'utilisation des données de
+//               la base de donnée en lien avec la connexion d'un utilisateur.
+//               Celle-ci effectue tous les appels vers la base de données ainsi
+//               que l'interprétation de ces données avant d'être retourné vers
+//               l'application pour être affiché à l'écran.
+//
+//----------------------------------------------------------------------------------
 using AuthenticationService.Managers;
 using AuthenticationService.Models;
 using AuthenticationService.Token;

@@ -7,7 +7,8 @@
 // 16 Juillet 2023
 //
 // Nom : webapi.Definitions
-// Description : 
+// Description : Classe qui effectue l'enregistrement des valeurs par défaut
+//               présente dans la base de données.
 //
 //----------------------------------------------------------------------------------
 using webapi.Models.Database.Building;

@@ -1,4 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Database.Users
+// Description : Classe qui régis les informations requise pour effectuer la
+//               création de la table 'usr_Skills' dans la base de données.
+//
+//----------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Users
 {

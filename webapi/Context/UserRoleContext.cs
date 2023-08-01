@@ -1,4 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Context
+// Description : Classe qui effectue la gestion de la base de données.
+//
+//----------------------------------------------------------------------------------
+using Microsoft.EntityFrameworkCore;
 using GiDlls;
 
 using webapi.Definitions;
@@ -212,6 +224,7 @@ namespace webapi.Context
 
         private void InitContent()
         {
+            #region Lieu
             foreach (TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
             {
                 AddLieu(addr.NamePlace, AddAddress(new TransAddress(addr.DoorNumber,
@@ -223,21 +236,25 @@ namespace webapi.Context
                                                                     AddProvince(addr.Province,
                                                                     AddCountry(addr.Pays))))));
             }
-
+            #endregion
+            #region Roles
             foreach (TransitRoles role in new DbBaseCreationLists().Roles)
             {
                 AddRole(role);
             }
-
+            #endregion
+            #region Users
             foreach (TransitUserValue tuv in  new DbBaseCreationLists().Users)
             {
                 AddUser(tuv);
             }
-
-            foreach(TransitTournementType tt in new  DbBaseCreationLists().TournamentType)
+            #endregion
+            #region TournamentType
+            foreach (TransitTournementType tt in new  DbBaseCreationLists().TournamentType)
             {
                 AddTournamentType(tt);
             }
+            #endregion
         }
         #region Country
         private Int64 GetCountry(String Name)

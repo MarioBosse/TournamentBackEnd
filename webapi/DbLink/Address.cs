@@ -1,6 +1,19 @@
+//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.DbLink
+// Description : Classe qui régis les valeurs de retour pour toutes les appels d'API
+//               effectués. L'objet retournée informe l'application des informations
+//               en lien avec l'adresse d'un utilistateur.
+//
+//----------------------------------------------------------------------------------
 using webapi.Context;
 using webapi.Models.Database.Address;
-using webapi.Models.Database.Building;
 using webapi.Models.Repository.Users;
 
 namespace webapi.DbLink

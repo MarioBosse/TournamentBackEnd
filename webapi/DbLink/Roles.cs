@@ -9,10 +9,10 @@
 // Nom : webapi.DbLink
 // Description : Cette classe effectue le lien entre les controleurs et les différents
 //               DbContext lié à l'interprétation et a l'utilisation des données de
-//               la base de donnée en lien avec les utilisateurs. Celle-ci effectue
-//               tous les appels vers la base de données ainsi que l'interprétation
-//               de ces données avant d'être retourné vers l'application pour être
-//               affiché à l'écran.
+//               la base de donnée en lien avec les roles et leurs définition.
+//               Celle-ci effectue tous les appels vers la base de données ainsi
+//               que l'interprétation  de ces données avant d'être retourné vers
+//               l'application pour être affiché à l'écran.
 //
 //----------------------------------------------------------------------------------
 using webapi.Context;

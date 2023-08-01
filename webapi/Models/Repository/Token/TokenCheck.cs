@@ -1,4 +1,18 @@
-﻿using webapi.Models.Repository.Roles;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Repository.Token
+// Description : Classes qui régis les valeurs d'entrées requise pour effectuer
+//               une connexion stable et sécuritaire entre l'application et les
+//               services de gestion de la base de données.
+//
+//----------------------------------------------------------------------------------
+using webapi.Models.Repository.Roles;
 
 namespace webapi.Models.Repository.Token
 {
