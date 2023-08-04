@@ -16,6 +16,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Users
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : User
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("usr_Users")]
     public class User
     {

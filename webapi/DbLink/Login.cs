@@ -26,6 +26,16 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.DbLink
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Login
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class Login
     {
         private readonly UserRoleContext _roleContext;

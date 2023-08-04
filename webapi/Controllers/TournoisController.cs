@@ -21,6 +21,18 @@ using webapi.Models.Repository.Tournament.Types;
 
 namespace webapi.Controllers
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class Controleur
+    // Nom : TournoisController
+    // Héritage : Controller
+    // Définition de route : Api/User
+    //                       Api/Address
+    //
+    //----------------------------------------------------------------------------------
     [ApiController]
     [Route("Api/Tournament/")]
     public class TournoisController : Controller

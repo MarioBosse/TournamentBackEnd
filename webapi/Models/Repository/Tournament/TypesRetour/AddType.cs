@@ -15,6 +15,16 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.Models.Repository.Tournament.TypesRetour
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : AddType
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class AddType
     {
         public Int64 Id { get; set; }
@@ -22,6 +32,16 @@ namespace webapi.Models.Repository.Tournament.TypesRetour
         public TokenConnexion Validation { get; set; } = new TokenConnexion();
     }
 
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : DeleteType
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class DeleteType
     {
         public bool DeleteDone { get; set; } = false;

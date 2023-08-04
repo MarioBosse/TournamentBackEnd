@@ -24,6 +24,16 @@ using webapi.Models.Repository.Tournament;
 
 namespace webapi.DbLink
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Tournament
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class Tournament
     {
         private UserRoleContext _roleContext { get; set; }

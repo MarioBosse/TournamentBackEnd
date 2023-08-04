@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Users
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Token
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("usr_token")]
     public class Token
     {

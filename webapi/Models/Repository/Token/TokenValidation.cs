@@ -13,6 +13,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Repository.Token
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TokenValidation
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TokenValidation
     {
         public bool IsValid { get; set; }

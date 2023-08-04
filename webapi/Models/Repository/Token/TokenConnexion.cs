@@ -14,6 +14,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Repository.Token
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TokenConnexion
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TokenConnexion
     {
         public bool IsConnected { get; set; }

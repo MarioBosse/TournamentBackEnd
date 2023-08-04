@@ -17,6 +17,16 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.Models.Repository.Login
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : GetAlls
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class GetAlls
     {
         public TokenConnexion TokenConnexion { get; set; } = new TokenConnexion();

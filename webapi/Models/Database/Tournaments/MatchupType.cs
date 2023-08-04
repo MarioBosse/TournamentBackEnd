@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Tournaments
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : MatchupType
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("trn_MatchupTypes")]
     public class MatchupType
     {

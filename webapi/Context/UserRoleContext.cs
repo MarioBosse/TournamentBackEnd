@@ -23,6 +23,17 @@ using webapi.Models.Database.Users;
 
 namespace webapi.Context
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : UserRoleContext
+    // Héritage : DbContext
+    //
+    //----------------------------------------------------------------------------------
+
     //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class UserRoleContext : DbContext
     {
@@ -73,7 +84,7 @@ namespace webapi.Context
         public DbSet<Tournament>? Tournaments { get; private set; }
         public DbSet<TournamentValidity> tournamentValidities { get; private set; }
         public DbSet<TournamentPeriod>? TournamentPeriods { get; private set; }
-        public DbSet<TournamentPhaese>? TournamentPhaeses { get; private set; }
+        public DbSet<TournamentPhase>? TournamentPhaeses { get; private set; }
         public DbSet<TournamentType>? TournamentTypes { get; private set; }
         #endregion
 
@@ -181,7 +192,7 @@ namespace webapi.Context
                 entity.HasKey(e => e.IdTournamentPeriod);
             });
 
-            modelBuilder.Entity<TournamentPhaese>(entity => {
+            modelBuilder.Entity<TournamentPhase>(entity => {
                 entity.HasKey(e => e.IdTournamentPhase);
             });
 

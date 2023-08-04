@@ -13,6 +13,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Database.Building
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TransitAdressesValue
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TransitAdresseValue
     {
         public string NamePlace { get; set; } = string.Empty;

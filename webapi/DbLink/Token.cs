@@ -17,6 +17,16 @@ using webapi.Models.Database.Users;
 
 namespace webapi.DbLink
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Token
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class Token
     {
         private readonly UserRoleContext _roleContext;

@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Camping
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Terrain
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("cmp_Terrain")]
     public class Terrain
     {

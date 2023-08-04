@@ -14,6 +14,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Repository.Token
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : CheckConnexion
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class CheckConnexion
     {
         public String Email { get; set; } = String.Empty;

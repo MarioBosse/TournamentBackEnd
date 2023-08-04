@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Address
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Country
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("adr_Countries")]
     public class Country
     {

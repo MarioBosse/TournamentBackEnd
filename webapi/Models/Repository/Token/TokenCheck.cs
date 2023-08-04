@@ -16,12 +16,32 @@ using webapi.Models.Repository.Roles;
 
 namespace webapi.Models.Repository.Token
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TokenCheck
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TokenCheck
     {
         public String Email { get; set; } = String.Empty;
         public String Token { get; set; } = String.Empty;
     }
 
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : LoginUser
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class LoginUser
     {
         public TokenCheck tokenCheck { get; set; } = new TokenCheck();

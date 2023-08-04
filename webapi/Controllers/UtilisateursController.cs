@@ -18,6 +18,18 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.Controllers
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class Controleur
+    // Nom : UtilisateursController
+    // Héritage : Controler
+    // Définition de route : Api/User
+    //                       Api/Address
+    //
+    //----------------------------------------------------------------------------------
     [ApiController]
     [Route("Api/")]
     public class UtilisateursController : Controller

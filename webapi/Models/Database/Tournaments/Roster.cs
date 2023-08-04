@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Tournaments
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Roster
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("trn_Rosters")]
     public class Roster
     {

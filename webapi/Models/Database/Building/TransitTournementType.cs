@@ -13,6 +13,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Database.Building
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TransTournementType
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TransitTournementType
     {
         public string Name { get; set; } = string.Empty;

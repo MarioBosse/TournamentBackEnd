@@ -13,6 +13,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Database.Building
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TransAddress
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TransAddress
     {
         public string doorNumber { get; set; }
@@ -22,6 +32,26 @@ namespace webapi.Models.Database.Building
         public string zipcode { get; set; }
         public long city { get; set; }
 
+        //----------------------------------------------------------------------------------
+        //
+        // Concepteur : Mario Bossé
+        // 16 Juillet 2023
+        //
+        // Fonction Constructeur
+        // Héritage : Aucun
+        // Niveau d'acces : Public
+        // Base d'enregistrement : Aucun
+        // Type de retour : Aucun
+        // Nom : TransAddress
+        // Description : Fonction contructeur qui effectue la création d'un objet TransAddress
+        // Paramètres :     String  door        Numéro de porte
+        //                  String  street      Nom de la rue
+        //                  String  street2     Informations complémentaire de l'adresse
+        //                  String  appNumber   Numéro d'appatement par défaut de l'adresse (si applicable)
+        //                  String  zip         Code postal
+        //                  Long    ville       Numéro d'identification de l'adresse
+        //
+        //----------------------------------------------------------------------------------
         public TransAddress(string door, string street, string street2, string appNumber, string zip, long ville)
         {
             doorNumber = door;

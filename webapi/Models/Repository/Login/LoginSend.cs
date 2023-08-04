@@ -20,12 +20,32 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Repository.Login
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : LoginSend
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class LoginSend
     {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
 
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : EmailCheck
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class EmailCheck
     {
         public string Email { get; set; } = string.Empty;

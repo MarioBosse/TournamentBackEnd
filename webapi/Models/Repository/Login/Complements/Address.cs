@@ -13,6 +13,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Repository.Login.Complements
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Address
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class Address
     {
         public String DoorNumber { get; set; } = String.Empty;

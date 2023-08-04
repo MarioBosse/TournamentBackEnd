@@ -12,6 +12,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Repository
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : VraixFayx
+    // Héritage : Aucune
+    //
+    //----------------------------------------------------------------------------------
     public class VraiFaux
     {
         public Boolean Value { get; set; }

@@ -16,6 +16,16 @@ using System.Security.Permissions;
 
 namespace webapi.Models.Database.Roles
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Role
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("rol_Roles")]
     public class Role
     {

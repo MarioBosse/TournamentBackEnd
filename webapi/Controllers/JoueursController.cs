@@ -15,10 +15,20 @@
 using Microsoft.AspNetCore.Mvc;
 using webapi.Context;
 using webapi.Models.Repository.Token;
-using webapi.Models.Repository.Users;
 
 namespace webapi.Controllers
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class Controleur
+    // Nom : JoueursController
+    // Héritage : Controler
+    // Définition de route : Api/User
+    //
+    //----------------------------------------------------------------------------------
     [ApiController]
     [Route("Api/Users/")]
     public class JoueursController : Controller

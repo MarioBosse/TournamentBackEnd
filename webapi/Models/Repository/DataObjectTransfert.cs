@@ -16,6 +16,13 @@ using webapi.Context;
 
 namespace webapi.Models.Repository
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Définition de Class
+    // Nom : DataObjectTransfert
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class DataObjectTransfert
     {
         public Login.Complements.Address? GetAddress(Database.Address.Address address, UserRoleContext context)

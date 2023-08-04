@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Roles
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : DisciplineUser
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("rol_DisciplinesUsers")]
     public class DisciplineUser
     {

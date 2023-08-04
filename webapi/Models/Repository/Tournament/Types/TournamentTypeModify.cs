@@ -15,6 +15,16 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.Models.Repository.Tournament.Types
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TournamentTypeModify
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TournamentTypeModify
     {
         public String Origin { get; set; } = String.Empty;

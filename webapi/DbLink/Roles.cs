@@ -36,6 +36,16 @@ using System.Data.Entity;
 //----------------------------------------------------------------------------------
 namespace webapi.DbLink
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Roles
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class Roles
     {
         private UserRoleContext _roleContext { get; set; }

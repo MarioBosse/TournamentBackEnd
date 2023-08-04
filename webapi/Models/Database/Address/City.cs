@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Address
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : City
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("adr_Citys")]
     public class City
     {

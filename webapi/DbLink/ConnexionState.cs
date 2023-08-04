@@ -17,6 +17,16 @@ using webapi.Models.Repository.Token;
 
 namespace webapi.DbLink
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : ConnexionState
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class ConnexionState
     {
         private UserRoleContext _roleContext;

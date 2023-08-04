@@ -14,6 +14,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Repository.Login
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : AllUsers
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class AllUsers
     {
         public string FirstName { get; set; } = string.Empty;

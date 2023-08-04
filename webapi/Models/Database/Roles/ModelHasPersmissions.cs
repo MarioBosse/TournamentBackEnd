@@ -15,6 +15,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Roles
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : ModelHasPermissions
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("rol_ModelHasPermissions")]
     public class ModelHasPersmissions
     {

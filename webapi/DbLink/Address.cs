@@ -18,6 +18,16 @@ using webapi.Models.Repository.Users;
 
 namespace webapi.DbLink
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Address
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class Address
     {
         private UserRoleContext _roleContext;

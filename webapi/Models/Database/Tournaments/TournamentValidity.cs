@@ -16,6 +16,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace webapi.Models.Database.Tournaments
 {
     [Table("trn_tournamentValidity")]
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TournamentValidity
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TournamentValidity
     {
         public Int64 IdTournamentValidity { get; set; }

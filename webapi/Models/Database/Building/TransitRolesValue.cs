@@ -13,6 +13,16 @@
 //----------------------------------------------------------------------------------
 namespace webapi.Models.Database.Building
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TransitRoleValue
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TransitRolesValue
     {
         public string Name { get; set; } = string.Empty;

@@ -15,8 +15,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Tournaments
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TournamentPhase
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("trn_TournamentPhases")]
-    public class TournamentPhaese
+    public class TournamentPhase
     {
         public long IdTournamentPhase { get; set; }
         public long IdTournamentId { get; set; }
