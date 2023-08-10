@@ -40,6 +40,9 @@ internal class Program
 {
     //----------------------------------------------------------------------------------
     //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
     // Niveau d'accès : Privte
     // Base d'enregistrement : Static
     // Type de retour : Aucun
