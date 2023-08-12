@@ -19,11 +19,11 @@ namespace AuthenticationService
         }
 
         #region Private Methods
-        private static JWTContainerModel GetJWTContainerModel(String SecretJey)
+        private static GIMBContainerModel GetJWTContainerModel(String SecretJey)
         {
-            return new JWTContainerModel()
+            return new GIMBContainerModel()
             {
-                SecretKey = new JWTContainerModel().SecretKey
+                SecretKey = new GIMBContainerModel().SecretKey
             };
         }
         #endregion

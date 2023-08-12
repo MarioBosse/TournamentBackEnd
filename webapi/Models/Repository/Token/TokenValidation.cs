@@ -1,5 +1,28 @@
-﻿namespace webapi.Models.Repository.Token
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Repository.Token
+// Description : Classe qui régis les valeurs de retour la demande de validation
+//               du jeton de connexnio.
+//
+//----------------------------------------------------------------------------------
+namespace webapi.Models.Repository.Token
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : TokenValidation
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class TokenValidation
     {
         public bool IsValid { get; set; }
