@@ -6,29 +6,28 @@
 // Concepteur : Mario Bossé
 // 16 Juillet 2023
 //
-// Nom : webapi.Models.Database.Building
-// Description : Classe qui régis l'importation d'un groupe de données vers la base
-//               de données.
+// Nom : AuthenticationService.Models
+// Description : Cette espace définie les structures de données à utiliser pour le
+//               service d'autentification..
 //
 //----------------------------------------------------------------------------------
-namespace webapi.Models.Database.Building
+namespace AutenticationService.Models
 {
     //----------------------------------------------------------------------------------
     //
     // Concepteur : Mario Bossé
     // 16 Juillet 2023
     //
-    // Définition de Class
-    // Nom : TransitRoleValue
+    // Définition de classe
+    // Nom : GIMBClaimModel
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    public class TransitRolesValue
+    public class GIMBClaimModel
     {
-        public string Name { get; set; } = string.Empty;
-        public string GuardName { get; set; } = string.Empty;
-        public ulong Mask { get; set; } = ulong.MinValue;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; set;} = DateTime.Now;
+        // Nom du Claims a créer
+        public string Name { get; set; } = String.Empty;
+        // Valeur a enregistrer
+        public string Value { get; set; } = String.Empty;
     }
 }

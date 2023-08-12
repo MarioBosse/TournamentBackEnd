@@ -1,8 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Database.Roles
+// Description : Classe qui régis les informations pour effectuer la création de la
+//               table 'rol_Roles' dans la base de données.
+//
+//----------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Permissions;
 
 namespace webapi.Models.Database.Roles
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Role
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("rol_Roles")]
     public class Role
     {
