@@ -8,7 +8,7 @@
 //
 // Nom : webapi.Models.Database.Tournaments
 // Description : Classe qui régis les informations pour effectuer la création de la
-//               table 'trn_Players' dans la base de données.
+//               table 'trn_TournamentPhases' dans la base de données.
 //
 //----------------------------------------------------------------------------------
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,15 +21,17 @@ namespace webapi.Models.Database.Tournaments
     // 16 Juillet 2023
     //
     // Définition de Class
-    // Nom : Player
+    // Nom : TournamentPhase
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    [Table("trn_Players")]
-    public class Player
+    [Table("trn_TournamentPhases")]
+    public class TournamentPhase
     {
-        public long IdPlayer { get; set; }
-        public long IdTeam { get; set; }
-        public long IdUser { get; set; }
+        public long IdTournamentPhase { get; set; }
+        public long IdTournamentId { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdateddAt { get; set; } = DateTime.Now;
     }
 }

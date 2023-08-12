@@ -6,13 +6,12 @@
 // Concepteur : Mario Bossé
 // 16 Juillet 2023
 //
-// Nom : webapi.Models.Repository.Token
-// Description : Classe qui régis les valeurs requise pour effectuer une connexion
-//               avec les services responsable de la seine gestion des information
-//               contenues dans la base de données.
+// Nom : webapi.Models.Database.Building
+// Description : Classe qui régis l'importation d'un groupe de données vers la base
+//               de données.
 //
 //----------------------------------------------------------------------------------
-namespace webapi.Models.Repository.Token
+namespace webapi.Models.Database.Building
 {
     //----------------------------------------------------------------------------------
     //
@@ -20,13 +19,16 @@ namespace webapi.Models.Repository.Token
     // 16 Juillet 2023
     //
     // Définition de Class
-    // Nom : CheckConnexion
+    // Nom : TransitRoles
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    public class CheckConnexion
+    public class TransitRoles
     {
-        public String Email { get; set; } = String.Empty;
-        public String Token { get; set; } = String.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string GuardName { get; set; } = string.Empty;
+        public UInt32 Mask { get; set; } = 0;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }

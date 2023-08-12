@@ -6,27 +6,28 @@
 // Concepteur : Mario Bossé
 // 16 Juillet 2023
 //
-// Nom : webapi.Models.Repository.Token
-// Description : Classe qui régis les valeurs requise pour effectuer une connexion
-//               avec les services responsable de la seine gestion des information
-//               contenues dans la base de données.
+// Nom : AuthenticationService.Models
+// Description : Cette espace définie les structures de données à utiliser pour le
+//               service d'autentification..
 //
 //----------------------------------------------------------------------------------
-namespace webapi.Models.Repository.Token
+namespace AutenticationService.Models
 {
     //----------------------------------------------------------------------------------
     //
     // Concepteur : Mario Bossé
     // 16 Juillet 2023
     //
-    // Définition de Class
-    // Nom : CheckConnexion
+    // Définition de classe
+    // Nom : GIMBClaimModel
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    public class CheckConnexion
+    public class GIMBClaimModel
     {
-        public String Email { get; set; } = String.Empty;
-        public String Token { get; set; } = String.Empty;
+        // Nom du Claims a créer
+        public string Name { get; set; } = String.Empty;
+        // Valeur a enregistrer
+        public string Value { get; set; } = String.Empty;
     }
 }

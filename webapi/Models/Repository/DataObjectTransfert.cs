@@ -1,7 +1,28 @@
-﻿using webapi.Context;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Repository
+// Description : Classe qui établie les valeurs par défauts de la base de données
+//               du projet. Toutes les tables devant avoir dds valeurs par défaut
+//               doivent être inscrites dans cette classe.
+//
+//----------------------------------------------------------------------------------
+using webapi.Context;
 
 namespace webapi.Models.Repository
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Définition de Class
+    // Nom : DataObjectTransfert
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class DataObjectTransfert
     {
         public Login.Complements.Address? GetAddress(Database.Address.Address address, UserRoleContext context)

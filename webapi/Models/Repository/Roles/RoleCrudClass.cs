@@ -6,15 +6,16 @@
 // Concepteur : Mario Bossé
 // 16 Juillet 2023
 //
-// Nom : webapi.Models.Repository.Tournament
-// Description : Classes qui régissent les besoins pour l'utilisation de la table
-//               Tournament.
+// Nom : webapi.Models.Repository.Roles
+// Description : Classe qui régis les valeurs à manipuler soit par l'application,
+//               soit par le service, afin d'effectuer toutes les oppérations en
+//               lien avec les rôles de l'utilisateur.
 //
 //----------------------------------------------------------------------------------
-using webapi.Models.Database.Tournaments;
+using System.ComponentModel.DataAnnotations;
 using webapi.Models.Repository.Token;
 
-namespace webapi.Models.Repository.Tournament
+namespace webapi.Models.Repository.Roles
 {
     //----------------------------------------------------------------------------------
     //
@@ -22,20 +23,50 @@ namespace webapi.Models.Repository.Tournament
     // 16 Juillet 2023
     //
     // Définition de Class
-    // Nom : TournamentBase
+    // Nom : GetInfos
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    public class TournamentBase
+    public class GetInfos
     {
-        public Int64 IdTournament { get; set; }
-        public String Tournament { get; set; } = String.Empty;
-        public String TournamentType { get; set; } = String.Empty;
-        public String Name { get; set; } = String.Empty;
-        public Byte[]? Picture { get; set; }
+        public String Email { get; set; } = String.Empty;
+        public String Token { get; set; } = String.Empty;
     }
+
     //----------------------------------------------------------------------------------
     //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : RoleBase
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
+    public class RoleBase
+    {
+        public long IdUser { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string GuardName { get; set; } = string.Empty;
+    }
+
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : RolesBase
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
+    public class RolesBase
+    {
+        public List<RoleBase> Roles { get; set; } = new List<RoleBase>();
+
+        public TokenConnexion TokenConnexion { get; set; }
+    }
+
     // Concepteur : Mario Bossé
     // 16 Juillet 2023
     //
@@ -47,10 +78,6 @@ namespace webapi.Models.Repository.Tournament
     public class Add
     {
         public TokenConnexion Validation { get; set; } = new TokenConnexion();
-        public Int64 idTournament { get; set; }
-        public Int64 idTournamentType { get; set; }
-        public String Name { get; set; } = String.Empty;
-        public Byte[] Picture { get; set; }
     }
     //----------------------------------------------------------------------------------
     //
@@ -79,7 +106,6 @@ namespace webapi.Models.Repository.Tournament
     //----------------------------------------------------------------------------------
     public class Definition
     {
-        public ReadTournament Tournament { get; set; } = new ReadTournament();
         public TokenCheck Validation { get; set; } = new TokenCheck();
     }
     //----------------------------------------------------------------------------------
@@ -88,14 +114,16 @@ namespace webapi.Models.Repository.Tournament
     // 16 Juillet 2023
     //
     // Définition de Class
-    // Nom : GetAll
+    // Nom : ReadRole
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    public class GetAll
+    public class ReadRole
     {
-        public List<ReadTournament>? Tournaments { get; set; } = new List<ReadTournament>();
-        public TokenConnexion Validation { get; set; } = new TokenConnexion();
+        public long IdUser { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Guard { get; set; } = string.Empty;
+        public uint Mask { get; set; } = 0;
     }
     //----------------------------------------------------------------------------------
     //
@@ -103,48 +131,13 @@ namespace webapi.Models.Repository.Tournament
     // 16 Juillet 2023
     //
     // Définition de Class
-    // Nom : TournamentDelete
+    // Nom : RoleModify
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    public class TournamentDelete
+    public class RoleModify
     {
         public TokenCheck tokenCheck { get; set; } = new TokenCheck();
-        public TournamentBase tournament { get; set; } = new TournamentBase();
-    }
-    //----------------------------------------------------------------------------------
-    //
-    // Concepteur : Mario Bossé
-    // 16 Juillet 2023
-    //
-    // Définition de Class
-    // Nom : ReadTournament
-    // Héritage : Aucun
-    //
-    //----------------------------------------------------------------------------------
-    public class ReadTournament
-    {
-        public long IdTournament { get; set; }
-        public String Name { get; set; } = string.Empty;
-        public String TournamentType { get; set; } = String.Empty;
-        public byte[]? Picture { get; set; }
-
-        public TournamentType tournamentType { get; set; } = new TournamentType();
-    }
-    //----------------------------------------------------------------------------------
-    //
-    // Concepteur : Mario Bossé
-    // 16 Juillet 2023
-    //
-    // Définition de Class
-    // Nom : TournamentModify
-    // Héritage : Aucun
-    //
-    //----------------------------------------------------------------------------------
-    public class TournamentModify
-    {
-        public TokenCheck tokenCheck { get; set; } = new TokenCheck();
-        public TournamentBase Origin { get; set; } = new TournamentBase();
-        public String NewName { get; set; } = String.Empty;
+        public RoleBase Origin { get; set; } = new RoleBase();
     }
 }

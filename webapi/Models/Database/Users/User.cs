@@ -1,9 +1,31 @@
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Models.Database.Users
+// Description : Classe qui régis les informations pour créer la table 'usr_Users'
+//               dans la base de données.
+//
+//----------------------------------------------------------------------------------
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webapi.Models.Database.Users
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : User
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     [Table("usr_Users")]
     public class User
     {
@@ -13,6 +35,7 @@ namespace webapi.Models.Database.Users
         [Required]
         public string Email { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
+        public UInt32 Roles { get; set; } = 0;
         public DateTime? Birthdate { get; set; }
         [Required]
         public string Password { get; set; } = string.Empty;

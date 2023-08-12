@@ -1,4 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Context
+// Description : Classe qui effectue la gestion de la base de données.
+//
+//----------------------------------------------------------------------------------
+using Microsoft.EntityFrameworkCore;
 using GiDlls;
 
 using webapi.Definitions;
@@ -11,16 +23,30 @@ using webapi.Models.Database.Users;
 
 namespace webapi.Context
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : UserRoleContext
+    // Héritage : DbContext
+    //
+    //----------------------------------------------------------------------------------
+
     //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class UserRoleContext : DbContext
     {
         //private static readonly MySqlEFConfiguration? _configuration;
         private String _connectionString { get; set; } = String.Empty;
+        private IConfiguration _configuration { get; set; }
+
         private Boolean IsStarted { get; set; } = false;
 
-        public UserRoleContext(String connectionString)
+        public UserRoleContext(String connectionString, IConfiguration configuration)
         {
             _connectionString = connectionString;
+            _configuration = configuration;
             Database.EnsureCreated();
             InitContent();
         }
@@ -58,7 +84,7 @@ namespace webapi.Context
         public DbSet<Tournament>? Tournaments { get; private set; }
         public DbSet<TournamentValidity> tournamentValidities { get; private set; }
         public DbSet<TournamentPeriod>? TournamentPeriods { get; private set; }
-        public DbSet<TournamentPhaese>? TournamentPhaeses { get; private set; }
+        public DbSet<TournamentPhase>? TournamentPhaeses { get; private set; }
         public DbSet<TournamentType>? TournamentTypes { get; private set; }
         #endregion
 
@@ -166,7 +192,7 @@ namespace webapi.Context
                 entity.HasKey(e => e.IdTournamentPeriod);
             });
 
-            modelBuilder.Entity<TournamentPhaese>(entity => {
+            modelBuilder.Entity<TournamentPhase>(entity => {
                 entity.HasKey(e => e.IdTournamentPhase);
             });
 
@@ -209,7 +235,8 @@ namespace webapi.Context
 
         private void InitContent()
         {
-            foreach(TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
+            #region Lieu
+            foreach (TransitAdresseValue addr in new DbBaseCreationLists().Addresss)
             {
                 AddLieu(addr.NamePlace, AddAddress(new TransAddress(addr.DoorNumber,
                                                                     addr.StreetName,
@@ -220,16 +247,25 @@ namespace webapi.Context
                                                                     AddProvince(addr.Province,
                                                                     AddCountry(addr.Pays))))));
             }
-
-            foreach(TransitUserValue tuv in  new DbBaseCreationLists().Users)
+            #endregion
+            #region Roles
+            foreach (TransitRoles role in new DbBaseCreationLists().Roles)
+            {
+                AddRole(role);
+            }
+            #endregion
+            #region Users
+            foreach (TransitUserValue tuv in  new DbBaseCreationLists().Users)
             {
                 AddUser(tuv);
             }
-
-            foreach(TransitTournementType tt in new  DbBaseCreationLists().TournamentType)
+            #endregion
+            #region TournamentType
+            foreach (TransitTournementType tt in new  DbBaseCreationLists().TournamentType)
             {
                 AddTournamentType(tt);
             }
+            #endregion
         }
         #region Country
         private Int64 GetCountry(String Name)
@@ -414,16 +450,17 @@ namespace webapi.Context
                         FirstName = usersValue.Firstname,
                         LastName = usersValue.Lastname,
                         Email = usersValue.Email,
+                        Roles = usersValue.Roles,
                         Password = usersValue.Password,
                         Gender = usersValue.Gender,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
                         IdAddress = IdAddr,
                         IsActivated = true,
-                        ProfilePhoto = new Utils().GetFileContent(usersValue.ProfilePicture)
+                        ProfilePhoto = new Utils().BinaryFileToBase64(usersValue.ProfilePicture)
                     };
                     // Enregistrement de l'utilisateur
-                    new DbLink.Users(this).AddUser(u);
+                    new DbLink.Users(this, _configuration).AddUser(u);
 
                     // Enregistrement des informations complémentaires
                     if(usersValue.Infos != null)
@@ -431,6 +468,36 @@ namespace webapi.Context
                 }
             }
             return GetUser(usersValue);
+        }
+        #endregion
+        #region Role
+        private Int64 GetRole(TransitRoles trv)
+        {
+            if (Roles == null || Roles.Count() == 0) return 0;
+            var test = Roles.Where(e => e.Name == trv.Name ||
+                                        e.GuardName == trv.GuardName).FirstOrDefault();
+            if (test != null)
+                return test.IdRole;
+            return 0;
+        }
+
+        private Int64 AddRole(TransitRoles roleValue)
+        {
+            if(roleValue == null) return 0;
+            var a = GetRole(roleValue);
+            if(a == 0)
+            {
+                Role role = new Role()
+                {
+                    Name = roleValue.Name,
+                    GuardName = roleValue.GuardName,
+                    Mask = roleValue.Mask,
+                    CreatedAt = roleValue.CreatedAt,
+                    UpdateddAt = roleValue.UpdatedAt
+                };
+                new DbLink.Roles(this, _configuration).AddRoles(role);
+            }
+            return GetRole(roleValue); 
         }
         #endregion
     }
