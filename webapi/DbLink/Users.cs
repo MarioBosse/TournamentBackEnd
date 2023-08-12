@@ -35,15 +35,22 @@ using webapi.Models.Repository.Users;
 //----------------------------------------------------------------------------------
 namespace webapi.DbLink
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Users
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class Users
     {
         private UserRoleContext _roleContext { get; set; }
         private IConfiguration _configuration { get; set; }
 
         //----------------------------------------------------------------------------------
-        //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
         //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
@@ -71,9 +78,6 @@ namespace webapi.DbLink
 
         //----------------------------------------------------------------------------------
         //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
-        //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
         //
@@ -98,9 +102,6 @@ namespace webapi.DbLink
         }
 
         //----------------------------------------------------------------------------------
-        //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
         //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
@@ -140,9 +141,6 @@ namespace webapi.DbLink
         }
 
         //----------------------------------------------------------------------------------
-        //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
         //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023

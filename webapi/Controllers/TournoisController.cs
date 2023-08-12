@@ -1,4 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿//----------------------------------------------------------------------------------
+//
+// Gestion Informatique Mario Bossé (GiMB)
+// @2023 Tout droit réservé. Reproducion interdite
+//
+// Concepteur : Mario Bossé
+// 16 Juillet 2023
+//
+// Nom : webapi.Controllers
+// API controleurs : Tournois
+// Description : Classe controleur qui expose des fontions qui seront appelé par
+//               l'application Web.
+//
+//----------------------------------------------------------------------------------
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using webapi.Context;
@@ -8,6 +21,18 @@ using webapi.Models.Repository.Tournament.Types;
 
 namespace webapi.Controllers
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class Controleur
+    // Nom : TournoisController
+    // Héritage : Controller
+    // Définition de route : Api/User
+    //                       Api/Address
+    //
+    //----------------------------------------------------------------------------------
     [ApiController]
     [Route("Api/Tournament/")]
     public class TournoisController : Controller

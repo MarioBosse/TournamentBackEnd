@@ -7,26 +7,24 @@
 // 16 Juillet 2023
 //
 // Nom : webapi.Definitions
-// Description : 
+// Description : Classe qui effectue l'enregistrement des valeurs par défaut
+//               présente dans la base de données.
 //
 //----------------------------------------------------------------------------------
 using webapi.Models.Database.Building;
 
-//----------------------------------------------------------------------------------
-//
-// Gestion Informatique Mario Bossé (GiMB)
-// @2023 Tout droit réservé. Reproducion interdite
-//
-// Concepteur : Mario Bossé
-// 16 Juillet 2023
-//
-// Définition de Class
-// Nom : Definitions
-// Héritage : Aucun
-//
-//----------------------------------------------------------------------------------
 namespace webapi.Definitions
 {
+    //----------------------------------------------------------------------------------
+    //
+    // Concepteur : Mario Bossé
+    // 16 Juillet 2023
+    //
+    // Définition de Class
+    // Nom : Definitions
+    // Héritage : Aucun
+    //
+    //----------------------------------------------------------------------------------
     public class DbBaseCreationLists
     {
         public List<TransitAdresseValue> Addresss { get; private set; } = new List<TransitAdresseValue>();
@@ -35,9 +33,6 @@ namespace webapi.Definitions
         public List<TransitRoles> Roles { get; private set; } = new List<TransitRoles>();
 
         //----------------------------------------------------------------------------------
-        //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
         //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
@@ -63,9 +58,6 @@ namespace webapi.Definitions
 
         //----------------------------------------------------------------------------------
         //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
-        //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
         //
@@ -88,9 +80,6 @@ namespace webapi.Definitions
         }
 
         //----------------------------------------------------------------------------------
-        //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
         //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
@@ -123,9 +112,6 @@ namespace webapi.Definitions
 
         //----------------------------------------------------------------------------------
         //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
-        //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
         //
@@ -157,9 +143,6 @@ namespace webapi.Definitions
         }
 
         //----------------------------------------------------------------------------------
-        //
-        // Gestion Informatique Mario Bossé (GiMB)
-        // @2023 Tout droit réservé. Reproducion interdite
         //
         // Concepteur : Mario Bossé
         // 16 Juillet 2023
