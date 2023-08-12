@@ -18,16 +18,6 @@ namespace AuthenticationService.Token
             return userSecretKey;
         }
 
-        private String BuildToken()
-        {
-            return "";
-        }
-
-        public String GetToken()
-        {
-            return "";
-        }
-
         public GenToken(IConfiguration configuration, String secToken = "")
         {
             userSecretKey = secToken;
@@ -42,11 +32,6 @@ namespace AuthenticationService.Token
             dateTime = dateTime.AddSeconds(Convert.ToDateTime(life).Second);
 
             return dateTime;
-        }
-
-        public Boolean IsValidToken(String token)
-        {
-            return false;
         }
     }
 }
