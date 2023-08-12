@@ -31,7 +31,8 @@ namespace webapi.Models.Database.Camping
         public long IdTerrain { get; set; }
         public string Name { get; set; } = string.Empty;
         public long IdAddress { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdateddAt { get; set; } = DateTime.Now;
+        public bool IsActivated { get; set; } = false;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; } = DateTime.Now;
     }
 }

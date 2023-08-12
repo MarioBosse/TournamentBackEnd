@@ -73,9 +73,9 @@ namespace webapi.Definitions
         private void InitUsers()
         {
             this.Users.Clear();
-            this.Users.AddRange( new List<TransitUserValue>()
+            this.Users.AddRange(new List<TransitUserValue>()
             {
-                new TransitUserValue() { Firstname="Mario", Lastname="Bossé", Gender="M", Roles = 129, Email="mario.bosse@cssc.gouv.qc.ca", Password="Smf1968/#123", Birthdate=new DateTime(1968,03,08), DoorNumber="464", StreetName="Rte François Gignac", Infos = new string[] { "Terrain 826" }, ProfilePicture="C:\\Users\\31673\\OneDrive - CSS de la Capitale\\Images\\Pellicule\\Moi - 2021-09-01.jpg" }
+                new TransitUserValue() { Firstname="Mario", Lastname="Bossé", Gender="M", Roles = 129, IsActivated = true, Email="mario.bosse@cssc.gouv.qc.ca", Password="Smf1968/#123", Birthdate=new DateTime(1968,03,08), DoorNumber="464", StreetName="Rte François Gignac", Infos = new string[] { "Terrain 826" }, ProfilePicture="C:\\Users\\31673\\OneDrive - CSS de la Capitale\\Images\\Pellicule\\Moi - 2021-09-01.jpg" }
             });
         }
 
@@ -99,7 +99,7 @@ namespace webapi.Definitions
             TournamentType.Clear();
             TournamentType.AddRange(new List<TransitTournementType>()
             {
-                new TransitTournementType() { Name = "Pétancle", },
+                new TransitTournementType() { Name = "Pétancle" },
                 new TransitTournementType() { Name = "Fer" },
                 new TransitTournementType() { Name = "Whist militaire" },
                 new TransitTournementType() { Name = "Cribe" },
@@ -129,16 +129,16 @@ namespace webapi.Definitions
             this.Roles.Clear();
             this.Roles.AddRange(new List<TransitRoles>()
             {
-                new TransitRoles() { Name = "Administrateur",           GuardName = "Admin",                Mask =   1 },
-                new TransitRoles() { Name = "Superviseur",              GuardName = "Supervisor",           Mask =   2 },
-                new TransitRoles() { Name = "Proprietaire",             GuardName = "Owner",                Mask =   4 },
-                new TransitRoles() { Name = "TournoiAdministrateur",    GuardName = "TournamentAdmin",      Mask =   8 },
-                new TransitRoles() { Name = "CoPropietaire",            GuardName = "CoOwner",              Mask =  16 },
-                new TransitRoles() { Name = "TournoiSuperviseur",       GuardName = "TournamentSupervisor", Mask =  32 },
-                new TransitRoles() { Name = "Participant",              GuardName = "Player",               Mask =  64 },
-                new TransitRoles() { Name = "Developeur",               GuardName = "Devloper",             Mask = 128 },
-                new TransitRoles() { Name = "Juge",                     GuardName = "Judge",                Mask = 256 },
-                new TransitRoles() { Name = "Marqueur",                 GuardName = "Marquee",              Mask = 512 }
+                new TransitRoles() { Name = "Administrateur",           IsActivated = true, GuardName = "Admin",                Mask =   1 },
+                new TransitRoles() { Name = "Superviseur",              IsActivated = true, GuardName = "Supervisor",           Mask =   2 },
+                new TransitRoles() { Name = "Proprietaire",             IsActivated = true, GuardName = "Owner",                Mask =   4 },
+                new TransitRoles() { Name = "TournoiAdministrateur",    IsActivated = true, GuardName = "TournamentAdmin",      Mask =   8 },
+                new TransitRoles() { Name = "CoPropietaire",            IsActivated = true, GuardName = "CoOwner",              Mask =  16 },
+                new TransitRoles() { Name = "TournoiSuperviseur",       IsActivated = true, GuardName = "TournamentSupervisor", Mask =  32 },
+                new TransitRoles() { Name = "Participant",              IsActivated = true, GuardName = "Player",               Mask =  64 },
+                new TransitRoles() { Name = "Developeur",               IsActivated = true, GuardName = "Devloper",             Mask = 128 },
+                new TransitRoles() { Name = "Juge",                     IsActivated = true, GuardName = "Judge",                Mask = 256 },
+                new TransitRoles() { Name = "Marqueur",                 IsActivated = true, GuardName = "Marquee",              Mask = 512 }
             });
         }
 

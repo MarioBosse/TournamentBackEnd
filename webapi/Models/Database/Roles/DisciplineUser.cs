@@ -30,5 +30,8 @@ namespace webapi.Models.Database.Roles
     {
         public long IdDiscipline { get; set; }
         public long IdUser { get; set; }
+        public bool IsActivated { get; set; } = false;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; } = DateTime.Now;
     }
 }
