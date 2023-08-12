@@ -120,7 +120,7 @@ namespace webapi.DbLink
             claims.Add(new Claim(ClaimTypes.Email, val.Email, ""));
             claims.Add(new Claim("Token", secTok.SecurityToken, "" ));
             var i = claims.AsEnumerable<System.Security.Claims.Claim>();
-            var token = new JWTService(secTok.SecurityToken).GenerateToken(new JWTContainerModel()
+            var token = new GIMBServices(secTok.SecurityToken).GenerateToken(new GIMBContainerModel()
             {
                 SecretKey = secTok.SecurityToken,
                 Claims = GetClaims(claims).ToArray<Claim>()
@@ -154,9 +154,9 @@ namespace webapi.DbLink
             Models.Database.Users.Token? secretKey = _roleContext.Tokens.Where(t => t.IdUser == id.IdUser).FirstOrDefault();
             if (secretKey == null) return null;
 
-            if(new JWTService(secretKey.SecurityToken).IsTokenValid(tokenRead.Token))
+            if(new GIMBServices(secretKey.SecurityToken).IsTokenValid(tokenRead.Token))
             {
-                IEnumerable<Claim> cls = new JWTService(secretKey.SecurityToken).GetTokenClaims(tokenRead.Token);
+                IEnumerable<Claim> cls = new GIMBServices(secretKey.SecurityToken).GetTokenClaims(tokenRead.Token);
                 List<Claim> lCls = cls.ToList();
                 foreach (Claim c in lCls)
                 {

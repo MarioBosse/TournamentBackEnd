@@ -6,32 +6,28 @@
 // Concepteur : Mario Bossé
 // 16 Juillet 2023
 //
-// Nom : AuthenticationService.Managers
-// Description : Cette espace effectue la gestion des authentifications dans les
-//               applications gèré par GiMB.
+// Nom : AuthenticationService.Models
+// Description : Cette espace définie les structures de données à utiliser pour le
+//               service d'autentification..
 //
 //----------------------------------------------------------------------------------
-using AuthenticationService.Models;
-using System.Security.Claims;
-
-namespace AuthenticationService.Managers
+namespace AutenticationService.Models
 {
     //----------------------------------------------------------------------------------
     //
     // Concepteur : Mario Bossé
     // 16 Juillet 2023
     //
-    // Définition d'Interface
-    // Nom : IAuthService
+    // Définition de classe
+    // Nom : GIMBClaimModel
     // Héritage : Aucun
     //
     //----------------------------------------------------------------------------------
-    public interface IAuthService
+    public class GIMBClaimModel
     {
-        string SecretKey { get; set; }
-
-        bool IsTokenValid(string token);
-        string GenerateToken(IAuthContainerModel model);
-        IEnumerable<Claim> GetTokenClaims(string token);
+        // Nom du Claims a créer
+        public string Name { get; set; } = String.Empty;
+        // Valeur a enregistrer
+        public string Value { get; set; } = String.Empty;
     }
 }

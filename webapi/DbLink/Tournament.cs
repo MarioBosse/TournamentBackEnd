@@ -38,6 +38,7 @@ namespace webapi.DbLink
     {
         private UserRoleContext _roleContext { get; set; }
         private IConfiguration _configuration { get; set; }
+
         //----------------------------------------------------------------------------------
         //
         // Concepteur : Mario Bossé
