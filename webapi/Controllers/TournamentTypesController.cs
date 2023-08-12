@@ -4,10 +4,10 @@
 // @2023 Tout droit réservé. Reproducion interdite
 //
 // Concepteur : Mario Bossé
-// 16 Juillet 2023
+// 12 Août 2023
 //
 // Nom : webapi.Controllers
-// API controleurs : Tournois
+// API controleurs : TournamentType
 // Description : Classe controleur qui expose des fontions qui seront appelé par
 //               l'application Web.
 //
@@ -24,59 +24,55 @@ namespace webapi.Controllers
     //----------------------------------------------------------------------------------
     //
     // Concepteur : Mario Bossé
-    // 16 Juillet 2023
+    // 12 Août 2023
     //
     // Définition de Class Controleur
-    // Nom : TournoisController
+    // Nom : TournamentTypesController
     // Héritage : Controller
-    // Définition de route : Api/User
-    //                       Api/Address
+    // Définition de route : Api/Tournament/Types
     //
     //----------------------------------------------------------------------------------
     [ApiController]
-    [Route("Api/Tournament/")]
-    public class TournoisController : Controller
+    [Route("Api/Tournament/Types/")]
+    public class TournamentTypesController : Controller
     {
         private readonly UserRoleContext _roleContext;
         private readonly IConfiguration _configuration;
-        #region Constructeur
-        public TournoisController(UserRoleContext roleContext, IConfiguration configuration)
+
+        public TournamentTypesController(UserRoleContext roleContext, IConfiguration configuration)
         {
             _roleContext = roleContext;
             _configuration = configuration;
         }
-        #endregion
 
-        #region Tournament
-        [Route("All")]
-        public ActionResult GetAll(TokenCheck tokenCheck)
+        [Route("AllTypes")]
+        public ActionResult GetAllTypes(TokenCheck tokenCheck)
         {
             return Ok(JsonConvert.SerializeObject(new Tournament(_roleContext, _configuration).GetAllTypes(tokenCheck)));
         }
 
-        [Route("Type/Add")]
-        public ActionResult TournamentAdd(TournamentTypeAddRead type)
+        [Route("Add")]
+        public ActionResult TournamentTypeAdd(TournamentTypeAddRead type)
         {
             return Ok(new Tournament(_roleContext, _configuration).TournamentTypeAdd(type));
         }
 
-        [Route("Type/Delete")]
-        public ActionResult TournamentDelete(TournamentTypeDelete delete)
+        [Route("Delete")]
+        public ActionResult TournamentTypeDelete(TournamentTypeDelete delete)
         {
             return Ok(new Tournament(_roleContext, _configuration).TournamentTypeDelete(delete));
         }
 
-        [Route("Type/Modify")]
-        public ActionResult TournamentModify(TournamentTypeModify modify)
+        [Route("Modify")]
+        public ActionResult TournamentTypeModify(TournamentTypeModify modify)
         {
             return Ok(new Tournament(_roleContext, _configuration).TournamentTypeModify(modify));
         }
 
-        [Route("Type/Read")]
-        public ActionResult TournamentRead()
+        [Route("Read")]
+        public ActionResult TournamentTypeRead()
         {
             return Ok();
         }
-        #endregion
     }
 }
