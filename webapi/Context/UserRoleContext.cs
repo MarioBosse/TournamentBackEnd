@@ -282,7 +282,7 @@ namespace webapi.Context
             var p = GetCountry(Name);
             if (p == 0)
             {
-                Countries.Add(new Country { Name = Name, CreatedAt = DateTime.Now, UpdateddAt = DateTime.Now });
+                Countries.Add(new Country { Name = Name, CreatedAt = DateTime.Now, IsActivated = true, UpdatedAt = DateTime.Now });
                 SaveChanges();
             }
             return GetCountry(Name);
@@ -305,7 +305,7 @@ namespace webapi.Context
             var p = GetProvince(Name, pays);
             if (p == 0)
             {
-                if(Provinces != null) Provinces.Add(new Province { Name = Name, IdCountry = pays, CreatedAt = DateTime.Now, UpdateddAt = DateTime.Now });
+                if(Provinces != null) Provinces.Add(new Province { Name = Name, IdCountry = pays, CreatedAt = DateTime.Now, IsActivated = true, UpdatedAt = DateTime.Now });
                 SaveChanges();
             }
             return GetProvince(Name, pays);
@@ -328,7 +328,7 @@ namespace webapi.Context
             var v = GetVille(Name, province);
             if (v == 0)
             {
-                if(Cities != null) Cities.Add(new City { Name = Name, IdProvince = province, CreatedAt = DateTime.Now, UpdateddAt = DateTime.Now });
+                if(Cities != null) Cities.Add(new City { Name = Name, IdProvince = province, CreatedAt = DateTime.Now, IsActivated = true, UpdatedAt = DateTime.Now });
                 SaveChanges();
             }
             return GetVille(Name, province);
@@ -363,8 +363,9 @@ namespace webapi.Context
                                                                     AppNumber = ta.appartment,
                                                                     Zipcode=ta.zipcode,
                                                                     IdCity = ta.city,
+                                                                    IsActivated = true,
                                                                     CreatedAt = DateTime.Now,
-                                                                    UpdateddAt = DateTime.Now});
+                                                                    UpdatedAt = DateTime.Now});
                 SaveChanges();
             }
             return GetAddress(ta);
@@ -388,6 +389,7 @@ namespace webapi.Context
                 if (TournamentTypes != null) TournamentTypes.Add(new TournamentType()
                 {
                     Name = tt.Name,
+                    IsActivated = true,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                 });
@@ -412,8 +414,9 @@ namespace webapi.Context
             {
                 Terrains.Add(new Terrain() { Name = Name,
                                              IdAddress = Address,
+                                             IsActivated = true,
                                              CreatedAt = DateTime.Now,
-                                             UpdateddAt = DateTime.Now });
+                                             UpdatedAt = DateTime.Now });
                 SaveChanges();
             }
             return GetLieu(Name, Address);
@@ -492,8 +495,9 @@ namespace webapi.Context
                     Name = roleValue.Name,
                     GuardName = roleValue.GuardName,
                     Mask = roleValue.Mask,
+                    IsActivated = roleValue.IsActivated,
                     CreatedAt = roleValue.CreatedAt,
-                    UpdateddAt = roleValue.UpdatedAt
+                    UpdatedAt = roleValue.UpdatedAt
                 };
                 new DbLink.Roles(this, _configuration).AddRoles(role);
             }

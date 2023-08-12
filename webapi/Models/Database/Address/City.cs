@@ -31,7 +31,8 @@ namespace webapi.Models.Database.Address
         public long IdCity { get; set; }
         public string Name { get; set; } = string.Empty;
         public long IdProvince { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdateddAt { get; set; } = DateTime.Now;
+        public bool IsActivated { get; set; } = false;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; } = DateTime.Now;
     }
 }

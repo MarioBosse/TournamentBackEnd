@@ -36,7 +36,8 @@ namespace webapi.Models.Database.Building
         public String StreetName { get;set; } = String.Empty;
         public String[]? Infos { get; set; }
         public String ProfilePicture { get; set; } = String.Empty;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public bool IsActivated { get; set; } = false;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; } = DateTime.Now;
     }
 }

@@ -30,6 +30,10 @@ namespace webapi.Models.Database.Users
     {
         public long Id { get; set; }
         public long IdUser { get; set; }
+        public bool IsActivated { get; set; } = false;
+
         public string SecurityToken { get; set; } = string.Empty;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set;} = DateTime.Now;
     }
 }
