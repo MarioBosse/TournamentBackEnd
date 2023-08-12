@@ -31,5 +31,8 @@ namespace webapi.Models.Database.Roles
         public long IdModelHasRoles { get; set; }
         public string ModelType { get; set; } = string.Empty;
         public long IdModel { get; set; }
+        public bool IsActivated { get; set; } = false;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; } = DateTime.Now;
     }
 }

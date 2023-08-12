@@ -33,5 +33,8 @@ namespace webapi.Models.Database.Address
         public Int64 IdAppartmet { get; set; }
         public Int64 IdAddress { get; set; }
         public String Information { get; set; } = String.Empty;
+        public bool IsActivated { get; set; } = false;
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; } = DateTime.Now;
     }
 }
